@@ -48,6 +48,7 @@ class GestionStock:
         # self.menuinicio.add_command(label='Salir', command=controlador.salir)
         # raiz.config(menu=self.menu)
 
+        # Tabla para mostrar datos en el view
         style = ttk.Style(raiz)
         style.theme_use("clam")
         style.configure("Treeview", background="#2B2B2B", fieldbackground="#2B2B2B", foreground="white")
