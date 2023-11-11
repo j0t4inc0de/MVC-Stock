@@ -12,11 +12,14 @@ class Login:
         ventana.configure(bg="#cfe7e9") # Blanco cabros
         # ventana.configure(bg="#2B2B2B") # Color oscuro cabros
         
+        # Imagen de otro logo LOGO.PNG
         # self.imagen = PhotoImage(file='view/images/logo.png')
         # self.imagen.ajustada = self.imagen.subsample(6,5)
         # self.label_imagen = Label(ventana, image =self.imagen.ajustada)
         # self.label_imagen.pack()
         # self.label_imagen.place(x=115,y=5)
+        
+        # Imagen logo 2
         self.imagen_logo = Image.open("view/images/logo.png")
         self.imagen_logo.thumbnail((250, 250))
         self.imagen_logo = ImageTk.PhotoImage(self.imagen_logo)

@@ -27,7 +27,8 @@ class GestionStock:
         self.imagen_lupa = ImageTk.PhotoImage(self.imagen_lupa)
         self.label_lupa = tk.Button(raiz, image=self.imagen_lupa, borderwidth=0, highlightthickness=0)
         self.label_lupa.place(x=400,y=2)
-        # Imagen del logo comentada
+
+        # Imagen del logo.png comentada (por ahora)
         # self.imagen_logo = Image.open("view/images/logo.png")
         # self.imagen_logo.thumbnail((200, 200))
         # self.imagen_logo = ImageTk.PhotoImage(self.imagen_logo)
@@ -42,6 +43,7 @@ class GestionStock:
         self.btn_eliminar =  customtkinter.CTkButton(raiz, text="-", fg_color="#af2424", border_width=1, text_color="#F8F8FF", hover_color="#165c9e", border_color="#1A1A1A", width=30, height=30)
         self.btn_eliminar.place(x=715, y=6)
 
+        # Menu para implementar a futuro
         # self.menu = Menu(raiz)
         # self.menuinicio = Menu(self.menu, tearoff=0)
         # self.menu.add_cascade(label='Inicio', menu=self.menuinicio)
