@@ -1,3 +1,4 @@
+# Este es el main que solo hace correr el stock - Despues debe ser eliminado
 
 import sqlite3
 import tkinter as tk
