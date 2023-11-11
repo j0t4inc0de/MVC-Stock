@@ -27,6 +27,7 @@ class GestionStock:
         self.imagen_lupa = ImageTk.PhotoImage(self.imagen_lupa)
         self.label_lupa = tk.Button(raiz, image=self.imagen_lupa, borderwidth=0, highlightthickness=0)
         self.label_lupa.place(x=400,y=2)
+        # Imagen del logo comentada
         # self.imagen_logo = Image.open("view/images/logo.png")
         # self.imagen_logo.thumbnail((200, 200))
         # self.imagen_logo = ImageTk.PhotoImage(self.imagen_logo)
