@@ -11,7 +11,6 @@ class Modelo:
         # Tabla Usuarios
         self.conn = sqlite3.connect('data/base.db')
         self.cur = self.conn.cursor()
-        # self.cur.execute("CREATE TABLE IF NOT EXISTS usuarios (nombre TEXT, contraseña INTEGER)")
 
     def verificar(self, usuario, contraseña):
         self.cur.execute("SELECT * FROM usuarios WHERE usuario = ? AND contrasena = ?", (usuario, contraseña))
