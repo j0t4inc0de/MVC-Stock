@@ -41,11 +41,12 @@ class Controlador:
 
         # Segunda forma     Mismo error que le PREGUNTE al PROFE, PERO SI funcionan los botones
         self.raiz.destroy()
-        print("se destruye la view stock")
+        print("se destruye la view stock\n")
         from controller.controlador_ventas import Controlador
-        print("se importa CONTROLADOR")
+        print("se importa CONTROLADOR\n")
         self.ventana = tk.Tk()
         self.ventana.resizable(height=True, width=True)
         app = Controlador(self.ventana)
-        print("Se hace mainloop de controlador a la ventana")
+        print("Se hace mainloop de controlador a la ventana\n")
         self.ventana.mainloop()
+        print("se hizo mainloop (este print se ejecuto al cerrar la view ventas, raro¿?)")
