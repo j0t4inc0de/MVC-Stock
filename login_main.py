@@ -1,4 +1,5 @@
 # Main Login
+#Usuario: admin || Contraseña: 1
 #pip install customtkinter
 #pip install pillow
 #pip install packaging
