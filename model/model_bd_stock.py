@@ -11,7 +11,6 @@ class ModeloStock:
         # #Tabla Inventario
         self.conn = sqlite3.connect('data/base.db')
         self.cur = self.conn.cursor()
-        # self.cur.execute('''CREATE TABLE IF NOT EXISTS producto (id_producto INTEGER PRIMARY KEY AUTOINCREMENT, nombre TEXT, precio REAL)''')
         self.conn.commit()
     
     def insertar_prod(self, nombre, precio, cantidad):
