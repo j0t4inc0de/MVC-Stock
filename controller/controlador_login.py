@@ -46,5 +46,5 @@ class Controlador:
         print("Se abrió gestion stock")
     
     def cerrar_aplicacion(self):
-    # Manejar el cierre de la aplicación
+    # cierre de la aplicación
         self.ventana_principal.destroy()

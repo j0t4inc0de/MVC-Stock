@@ -1,4 +1,4 @@
-# Controller
+# Controller Gestion
 
 import sqlite3
 from tkinter import Menu
@@ -18,6 +18,8 @@ class Controlador:
         self.raiz = raiz  # Guardamos una referencia a la ventana raíz
 
         self.vista_stock.btn_añadir.configure(command=self.insertar_prod)
+        self.vista_stock.btn_abrirTest.configure(command=self.abrirTest)
+
     def insertar_prod(self):
         nombre = self.vista_stock.entry_nombre.get().lower()
         precio = self.vista_stock.entry_precio.get()
@@ -28,18 +30,19 @@ class Controlador:
         else:
             mb.showerror("Error", "No se pudo insertar el producto.")
 
-    # def irventa(self):
-    #     self.raiz.destroy()
-    #     self.raiz = tk.Tk()  # Crea una nueva ventana raíz
-    #     from view.vista_gestion_ventas import GestionVentas
-    #     self.vistaVentas = GestionVentas(self.raiz, self)  # Abre la nueva vista en la nueva ventana
+    def abrirTest(self):
+        # Primera forma         Abre la ventana y sale el mismo error que le PREGUNTE al PROFE, NO deja usar botones
+        # self.raiz.destroy()
+        # print("se destruye la ventana stock\n")
+        # from view.vista_gestion_ventas import GestionVentas
+        # print("se importa ventas\n")
+        # self.ventana = tk.Tk()
+        # self.vista_ventas = GestionVentas(self.ventana, self)
 
-    # def irstock(self):
-    #     self.raiz.destroy()
-    #     self.raiz = tk.Tk()  # Crea una nueva ventana raíz
-    #     from view.vista_gestion_stock import GestionStock
-    #     self.vistaStock = GestionStock(self.raiz, self)  # Abre la nueva vista en la nueva ventana
-
-    # def salir(self):
-    #     if mb.askyesno('Salir', 'Esta seguro de salir?'):
-    #         self.raiz.destroy()
+        # Segunda forma     Mismo error que le PREGUNTE al PROFE, PERO SI funcionan los botones
+        self.raiz.destroy()
+        from controller.controlador_ventas import Controlador
+        self.ventana = tk.Tk()
+        self.ventana.resizable(height=True, width=True)
+        app = Controlador(self.ventana)
+        self.ventana.mainloop()
