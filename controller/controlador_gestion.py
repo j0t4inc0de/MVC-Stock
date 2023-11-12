@@ -14,14 +14,14 @@ from view.vista_gestion_ventas import GestionVentas
 class Controlador:
     def __init__(self, raiz):
         self.modelo = ModeloStock()
-        self.vista = GestionStock(raiz, self)
+        self.vista_stock = GestionStock(raiz, self)
         self.raiz = raiz  # Guardamos una referencia a la ventana raíz
 
-        self.vista.btn_añadir.configure(command=self.insertar_prod)
+        self.vista_stock.btn_añadir.configure(command=self.insertar_prod)
     def insertar_prod(self):
-        nombre = self.vista.entry_nombre.get().lower()
-        precio = self.vista.entry_precio.get()
-        cantidad = self.vista.entry_cantidad.get()
+        nombre = self.vista_stock.entry_nombre.get().lower()
+        precio = self.vista_stock.entry_precio.get()
+        cantidad = self.vista_stock.entry_cantidad.get()
         resultado = self.modelo.insertar_prod(nombre, precio, cantidad)
         if resultado:
             mb.showinfo("Éxito", "Producto insertado con éxito.")
