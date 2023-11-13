@@ -1,3 +1,4 @@
+#Controlador producto.
 import sqlite3
 from tkinter import Menu
 import tkinter as tk
