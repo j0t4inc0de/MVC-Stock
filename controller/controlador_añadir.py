@@ -1,6 +1,6 @@
+# Controlador de añadir producto
 from model.model_bd_stock import ModeloStock
 from view.vista_producto import VistaProducto
-
 
 class Controlador:
     def __init__(self):

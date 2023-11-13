@@ -24,3 +24,13 @@ class ModeloStock:
                             (nombre, id_estado, precio, id_categoria))
         self.cursor.execute("INSERT INTO Existencia (nombre, cantidad) VALUES (?, ?)", (nombre, cantidad))
         self.conn.commit()
+
+    def obtener_datos(self):
+        self.cursor.execute("""
+            SELECT Producto.nombre, Producto.precio, Existencia.cantidad, Estado.nombre, Categoria.nombre
+            FROM Producto
+            JOIN Existencia ON Producto.nombre = Existencia.nombre
+            JOIN Estado ON Producto.id_estado = Estado.id_estado
+            JOIN Categoria ON Producto.id_categoria = Categoria.id_categoria
+        """)
+        return self.cursor.fetchall()
