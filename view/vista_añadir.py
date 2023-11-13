@@ -24,6 +24,7 @@ class VistaAñadir:
         boton_listo = customtkinter.CTkButton(ventanaAñadir, text="Listo", fg_color="#1ace65", border_width=1, text_color="#F8F8FF", hover_color="#165c9e", border_color="#1A1A1A", width=80, height=30, command=self.listo_click)
         boton_listo.place(x=90, y=180)
 
+    # Esta funcion se va a eliminar
     def listo_click(self):
         nombre = self.entry_nombre.get()
         precio = self.entry_precio.get()
