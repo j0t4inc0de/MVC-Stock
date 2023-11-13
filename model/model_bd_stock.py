@@ -15,7 +15,12 @@ class ModeloStock:
         self.cursor.execute("SELECT nombre FROM Estado")
         return [state[0] for state in self.cursor.fetchall()]
     
-    def add_producto(self, nombre, id_estado, precio):
-        self.cursor.execute("INSERT INTO Producto (nombre, id_estado, precio) VALUES (?, ?, ?)",
-                            (nombre, id_estado, precio))
+    def get_categorias(self):
+        self.cursor.execute("SELECT nombre FROM Categoria")
+        return [state[0] for state in self.cursor.fetchall()]
+    
+    def add_producto(self, nombre, id_estado, precio, cantidad, id_categoria):
+        self.cursor.execute("INSERT INTO Producto (nombre, id_estado, precio, id_categoria) VALUES (?, ?, ?, ?)",
+                            (nombre, id_estado, precio, id_categoria))
+        self.cursor.execute("INSERT INTO Existencia (nombre, cantidad) VALUES (?, ?)", (nombre, cantidad))
         self.conn.commit()
