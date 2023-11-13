@@ -12,3 +12,5 @@ if __name__ == "__main__":
     Producto.resizable(height=True, width=True)
     app = ControladorProducto(Producto)
     Producto.mainloop()
+
+#wena rodrigo lolero
