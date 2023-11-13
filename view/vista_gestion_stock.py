@@ -15,13 +15,6 @@ class GestionStock:
 
         self.entry_buscador = customtkinter.CTkEntry(raiz, placeholder_text="Buscador", text_color=("gray10", "#DCE4EE"),  width=380, height=30)
         self.entry_buscador.place(x=10, y=5)
-        
-        self.entry_nombre = customtkinter.CTkEntry(raiz, placeholder_text="Nombre", text_color=("gray10", "#DCE4EE"),  width=220, height=30)
-        self.entry_nombre.place(x=10,y=600)
-        self.entry_precio = customtkinter.CTkEntry(raiz, placeholder_text="Precio", text_color=("gray10", "#DCE4EE"),  width=220, height=30)
-        self.entry_precio.place(x=240,y=600)
-        self.entry_cantidad = customtkinter.CTkEntry(raiz, placeholder_text="Cantidad", text_color=("gray10", "#DCE4EE"),  width=220, height=30)
-        self.entry_cantidad.place(x=470,y=600)
 
         self.imagen_lupa = Image.open("view/images/lupa.png")
         self.imagen_lupa = ImageTk.PhotoImage(self.imagen_lupa)
@@ -34,7 +27,6 @@ class GestionStock:
         # self.imagen_logo = ImageTk.PhotoImage(self.imagen_logo)
         # self.label_logo = tk.Button(raiz, image=self.imagen_logo, borderwidth=0, highlightthickness=0)
         # self.label_logo.place(x=10,y=10)
-
 
         self.btn_añadir =  customtkinter.CTkButton(raiz, text="+", fg_color="#1ace65", border_width=1, text_color="#F8F8FF", hover_color="#165c9e", border_color="#1A1A1A", width=30, height=30)
         self.btn_añadir.place(x=680, y=6)
