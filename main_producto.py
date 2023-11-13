@@ -4,11 +4,9 @@ import tkinter as tk
 from tkinter import messagebox
 import customtkinter
 from PIL import Image, ImageTk
-from controller.controlador_producto import ControladorProducto
+
+from controller.controlador_añadir import Controlador
 
 #Cree el main para el producto.
 if __name__ == "__main__":
-    Producto = tk.Tk()
-    Producto.resizable(height=True, width=True)
-    app = ControladorProducto(Producto)
-    Producto.mainloop()
+    app = Controlador()

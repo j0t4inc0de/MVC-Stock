@@ -20,16 +20,6 @@ class Controlador:
         self.vista_stock.btn_añadir.configure(command=self.insertar_prod)
         self.vista_stock.btn_abrirTest.configure(command=self.abrirTest)
 
-    def insertar_prod(self):
-        nombre = self.vista_stock.entry_nombre.get().lower()
-        precio = self.vista_stock.entry_precio.get()
-        cantidad = self.vista_stock.entry_cantidad.get()
-        resultado = self.modelo.insertar_prod(nombre, precio, cantidad)
-        if resultado:
-            mb.showinfo("Éxito", "Producto insertado con éxito.")
-        else:
-            mb.showerror("Error", "No se pudo insertar el producto.")
-
     def abrirTest(self):
         # Primera forma         Abre la ventana y sale el mismo error que le PREGUNTE al PROFE, NO deja usar botones
         # self.raiz.destroy()

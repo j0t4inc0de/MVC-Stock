@@ -7,21 +7,15 @@ import customtkinter
 from PIL import Image, ImageTk
 # Modelo
 class ModeloStock:
-    def __init__(self):
-        # #Tabla Inventario
-        self.conn = sqlite3.connect('data/base.db')
-        self.cur = self.conn.cursor()
-        self.conn.commit()
-    
-    def insertar_prod(self, nombre, precio, cantidad):
-        try:
-            self.cur.execute("INSERT INTO Producto (nombre, precio) VALUES (?, ?)", (nombre, precio))
-            self.cur.execute("INSERT INTO Existencia (nombre, cantidad) VALUES (?, ?)", (nombre, cantidad))
-        except sqlite3.Error as e:
-            print("Error al insertar datos:", e)
-            self.conn.rollback()  # Revertir cualquier cambio en caso de error
-            return False
-        finally:
-            self.conn.commit()  # Confirmar la transacción
+    def __init__(self, db_path):
+        self.conn = sqlite3.connect(db_path)
+        self.cursor = self.conn.cursor()
 
-        return True
+    def get_estados(self):
+        self.cursor.execute("SELECT nombre FROM Estado")
+        return [state[0] for state in self.cursor.fetchall()]
+    
+    def add_producto(self, nombre, id_estado, precio):
+        self.cursor.execute("INSERT INTO Producto (nombre, id_estado, precio) VALUES (?, ?, ?)",
+                            (nombre, id_estado, precio))
+        self.conn.commit()
