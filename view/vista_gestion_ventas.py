@@ -1,4 +1,4 @@
-# View 
+# View ventas
 import sqlite3
 import tkinter as tk
 from tkinter import Menu, ttk

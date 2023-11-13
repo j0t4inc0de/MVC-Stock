@@ -1,4 +1,4 @@
-# Model
+# Model Usuarios
 
 import sqlite3
 import tkinter as tk

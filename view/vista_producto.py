@@ -10,6 +10,7 @@ class  VistaProducto:
         self.ventanaProducto.title("Añadir Producto")
         ventanaProducto.configure(bg="MediumPurple2")
         ventanaProducto.geometry("400x350")
+        
         #self.titulo.label(ventanaProducto, text="Mi título")
         #self.titulo.place(x=90, y=10)        
         self.entry_nombre_producto = customtkinter.CTkEntry(ventanaProducto, placeholder_text="nombre", text_color=("gray51", "#DCE4EE"),   width=220, height=30)  
@@ -34,4 +35,3 @@ class  VistaProducto:
         cantidadExistencia = self.entry_cantidad_existencia.get()
 
         print(f"Nombre: {nombreProducto},  Precio: {precioProducto}, Estado:{nombreEstado}, Cateogria:{nombreCategoria} , Cantidad: {cantidadExistencia}")
-

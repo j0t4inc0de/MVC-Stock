@@ -43,7 +43,7 @@ class GestionStock:
         self.btn_modificar =  customtkinter.CTkButton(raiz, text="Modificar", fg_color="#a1a313", border_width=1, text_color="#F8F8FF", hover_color="#165c9e", border_color="#1A1A1A", width=90, height=30)
         self.btn_modificar.place(x=750, y=6)
 
-        # BOTON QUE ESTOY USANDO PARA TESTEAS COSAS, SERÁ BORRADO
+        # BOTON QUE ESTOY USANDO PARA TESTEAR COSAS, SERÁ BORRADO
         self.btn_abrirTest =  customtkinter.CTkButton(raiz, text="Abrir Gestion ventas", fg_color="#1ace65", border_width=1, text_color="#F8F8FF", hover_color="#165c9e", border_color="#1A1A1A", width=30, height=30)
         self.btn_abrirTest.place(x=900, y=6)
 
