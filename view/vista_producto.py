@@ -8,7 +8,8 @@ class  VistaProducto:
     def __init__(self,ventanaProducto):
         self.ventanaProducto = ventanaProducto
         self.ventanaProducto.title("Añadir Producto")
-        ventanaProducto.configure(bg="MediumPurple2")
+        #cambio de color de la vista producto.
+        ventanaProducto.configure(bg="#2B2B2B")
         ventanaProducto.geometry("400x350")
         
         #self.titulo.label(ventanaProducto, text="Mi título")
