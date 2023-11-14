@@ -7,7 +7,6 @@ from PIL import Image, ImageTk
 # Modelo
 class Modelo:
     def __init__(self, db_path):
-        # Tabla Usuarios
         self.conn = sqlite3.connect(db_path)
         self.cur = self.conn.cursor()
 

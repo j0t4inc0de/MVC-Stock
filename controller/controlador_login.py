@@ -10,13 +10,15 @@ from model.model_bd_usuarios import Modelo
 from view.vista_login import Login
 
 class Controlador:
-    def __init__(self, ventana_principal):
-        self.modelo = Modelo()
-        self.ventana_principal = ventana_principal
-        self.vista = Login(ventana_principal)
-        self.vista.btn_ingresar.configure(command=self.verificar)
+    def __init__(self):
+        self.modelo_usuarios = Modelo('data/base.db')
+        self.vista_login = Login(None, self.modelo_usuarios)
+        self.vista_login.ventana.mainloop()
+
+        self.vista.btn_ingresar.configure(command=self.prueba)
 
     def verificar(self):
+        print("Se apretó el boton verificar en la vista")
         usuario = self.vista.entry_usuario.get().lower()
         contraseña = self.vista.entry_contraseña.get()
 

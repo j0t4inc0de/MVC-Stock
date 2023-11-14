@@ -6,7 +6,7 @@ from PIL import Image, ImageTk
 from ttkthemes import ThemedTk
 
 class Login:
-    def __init__(self, modelo_users):
+    def __init__(self, ventana, modelo_users):
         self.ventana = ThemedTk(theme="arc")
         self.ventana.title("AlaNorte")
         self.ventana.geometry("400x600")
