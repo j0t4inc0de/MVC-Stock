@@ -3,13 +3,12 @@
 import sqlite3
 import tkinter as tk
 from tkinter import messagebox as mb
-import customtkinter
 from PIL import Image, ImageTk
 # Modelo
 class Modelo:
-    def __init__(self):
+    def __init__(self, db_path):
         # Tabla Usuarios
-        self.conn = sqlite3.connect('data/base.db')
+        self.conn = sqlite3.connect(db_path)
         self.cur = self.conn.cursor()
 
     def verificar(self, usuario, contraseña):

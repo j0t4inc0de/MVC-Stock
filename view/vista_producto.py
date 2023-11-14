@@ -6,7 +6,13 @@ from ttkthemes import ThemedTk
 
 class  VistaProducto:
     def __init__(self, ventanaProducto, modelo_stock):
+
         self.ventanaProducto = ThemedTk(theme="arc")
+        #Rodrigo - agregue esto por si el temas sera en negro
+        # self.ventanaProducto = ThemedTk(themebg=True)
+        # self.ventanaProducto.set_theme('black')
+        #Rodrigo- funcion para mayor edicion sobre el tema -> self.ventanaProducto.set_theme_advanced(theme_name="dark")
+        #.
         self.ventanaProducto.title("Gestión de Stock")
         self.ventanaProducto.geometry("400x350")
         self.modelo_stock = modelo_stock
