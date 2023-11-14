@@ -15,7 +15,7 @@ class Controlador:
         self.vista_login = Login(None, self.modelo_usuarios)
         self.vista_login.ventana.mainloop()
 
-        self.vista.btn_ingresar.configure(command=self.prueba)
+        self.vista_login.btn_ingresar.configure(command=self.prueba)
 
     def verificar(self):
         print("Se apretó el boton verificar en la vista")
