@@ -22,7 +22,17 @@ class VistaPrincipal:
         self.mostrar_datos()
         # boton para actualizar la tabal
         ttk.Button(self.ventanaPrincipal, text="Actualizar", command=self.mostrar_datos).pack(pady=10)
+        # Rodrigo- Se agrega la imagen para boton actualizar
+        self.imagen_actualizar = Image.open("view/images/actualizar.png")
+        self.imagen_actualizar.thumbnail((250, 250))
+        self.imagen_actualizar = ImageTk.PhotoImage(self.imagen_actualizar)
+        self.label_actualizar = ttk.Button(self.ventanaPrincipal, image=self.imagen_actualizar).place(x=390,y=289)
         ttk.Button(self.ventanaPrincipal, text="Añadir Producto", command=self.abrir_vista_producto).pack(pady=10)
+        # Rodrigo- Se agrega la imagen para boton Añadir.
+        self.imagen_anadir = Image.open("view/images/Buscar.png")
+        self.imagen_anadir.thumbnail((250, 250))
+        self.imagen_anadir = ImageTk.PhotoImage(self.imagen_anadir)
+        self.label_anadir = ttk.Button(self.ventanaPrincipal, image=self.imagen_anadir).place(x=390,y=338)
 
         # boton de la lupa - hay que cambiar la imagen
         # self.imagen_lupa = Image.open("view/images/lupa.png")

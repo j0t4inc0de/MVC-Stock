@@ -1,7 +1,7 @@
 # View login
 import sqlite3
 import tkinter as tk
-from tkinter import  Label, PhotoImage, messagebox as mb
+from tkinter import  Label, ttk, PhotoImage, messagebox as mb
 from PIL import Image, ImageTk
 from ttkthemes import ThemedTk
 
@@ -22,17 +22,16 @@ class Login:
         # self.label_imagen.pack()
         # self.label_imagen.place(x=115,y=5)
         
-  
+        # Rodrigo se arregla el error del tema llamando a la funcion ttk.
         self.imagen_logo = Image.open("view/images/logo.png")
         self.imagen_logo.thumbnail((250, 250))
         self.imagen_logo = ImageTk.PhotoImage(self.imagen_logo)
-        self.label_logo = tk.Button(self.ventana, image=self.imagen_logo, borderwidth=0, highlightthickness=0)
-        self.label_logo.place(x=75,y=0)
+        self.label_logo = ttk.Button(self.ventana, image=self.imagen_logo).place(x=70,y=5)
 
-#Rodrigo - Nuevos labels y entrys para ventana !agregar funcion para ingresar al menu.
-        tk.Label(self.ventana, text="Usuario:").place(x=130,y=250)
-        self.entry_usuario = tk.Entry(self.ventana).place(x=130,y=270)
-        tk.Label(self.ventana, text="Contraseña:").place(x=130,y=300)
-        self.entry_contraseña = tk.Entry(self.ventana).place(x=130,y=320)
-        tk.Button(self.ventana, text="  Ingresar  ").place(x=160, y=370)
+        #Rodrigo - Nuevos labels y entrys para ventana sin el customtkinter.
+        ttk.Label(self.ventana, text="Usuario:").place(x=130,y=270)
+        self.entry_usuario = ttk.Entry(self.ventana).place(x=130,y=290)
+        ttk.Label(self.ventana, text="Contraseña:").place(x=130,y=320)
+        self.entry_contraseña = ttk.Entry(self.ventana).place(x=130,y=340)
+        self.btn_ingresar=ttk.Button(self.ventana, text="  Ingresar  ").place(x=160, y=390)
     
