@@ -20,12 +20,15 @@ class Login:
         self.logo_imagen = ImageTk.PhotoImage(self.logo)
         self.logo_posicion = Label(self.ventana, image=self.logo_imagen).place(x=72, y=5)
 
-        ttk.Label(self.ventana, text="Usuario:").place(x=130,y=270)
-        self.entry_usuario = ttk.Entry(self.ventana).place(x=130,y=290)
+        ttk.Label(self.ventana, text="Usuario:").place(x=130, y=270)
+        self.entry_usuario = ttk.Entry(self.ventana)
+        self.entry_usuario.place(x=130, y=290)
 
-        ttk.Label(self.ventana, text="Contraseña:").place(x=130,y=320)
-        self.entry_contraseña = ttk.Entry(self.ventana).place(x=130,y=340)
+        ttk.Label(self.ventana, text="Contraseña:").place(x=130, y=320)
+        self.entry_contraseña = ttk.Entry(self.ventana)
+        self.entry_contraseña.place(x=130, y=340)
         
         # Boton 'Ingresar'
-        self.btn_ingresar=ttk.Button(self.ventana, text="Ingresar").place(x=160, y=390)
+        self.btn_ingresar = ttk.Button(self.ventana, text="Ingresar")
+        self.btn_ingresar.place(x=159, y=390)
     
