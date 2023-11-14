@@ -14,12 +14,6 @@ from model.model_bd_usuarios import Modelo
 from view.vista_login import Login 
 
 
-# if __name__ == "__main__":
-#     ventana = tk.Tk()
-#     app = Controlador(ventana)
-#     ventana.mainloop() 
-
-
 if __name__ == "__main__":
     modelo_users = Modelo('data/base.db')
     app_principal = Login(modelo_users)
