@@ -46,11 +46,11 @@ class VistaMovimiento:
         ttk.Button(self.ventanaMovimiento, text="Listo", command=self.add_movimiento).place(x=180, y=300)
 
     def populate_tipo_movimiento_combobox(self):
-        tipos_movimiento = self.modelo_stock.get_tipo_movimientos()  # Corregir aquí
+        tipos_movimiento = self.modelo_stock.get_tipo_movimientos() 
         self.tipo_movimiento_combobox['values'] = tipos_movimiento
 
     def populate_existencia_combobox(self):
-        existencias = self.modelo_stock.get_existencias()  # Asumo que tienes un método get_existencias
+        existencias = self.modelo_stock.get_existencias()  
         self.existencia_combobox['values'] = existencias
         self.existencia_combobox.bind("<<ComboboxSelected>>", self.update_cantidad_existencia)
 
@@ -61,7 +61,7 @@ class VistaMovimiento:
         # Verifica que existencia_id sea un valor válido
         if existencia_id is not None:
             # Obtener la cantidad existente y mostrarla en el entry de cantidad
-            cantidad_existente = self.modelo_stock.get_cantidad_existente(existencia_id)  # Asumo que tienes un método get_cantidad_existente
+            cantidad_existente = self.modelo_stock.get_cantidad_existente(existencia_id)  
             self.entry_cantidad_existencia.delete(0, tk.END)
             self.entry_cantidad_existencia.insert(0, str(cantidad_existente))
         else:
