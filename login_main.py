@@ -11,6 +11,7 @@ from tkinter import messagebox
 from PIL import Image, ImageTk
 import ttkthemes
 
+from view.vista_login import Login
 from controller.controlador_login import Controlador
 
 
