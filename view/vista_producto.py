@@ -1,4 +1,4 @@
-#View producto.
+#Vista producto
 import tkinter as tk
 from tkinter import Menu, ttk
 from tkinter import messagebox as mb

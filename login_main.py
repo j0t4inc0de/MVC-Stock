@@ -1,19 +1,18 @@
 # Main Login
 
-#Usuario: admin || Contraseña: 1
-#pip install customtkinter
-#pip install pillow
-#pip install packaging
+# Usuario: admin || Contraseña: 1
+# pip install customtkinter
+# pip install pillow
+# pip install packaging
 
-import sqlite3
 import tkinter as tk
-from tkinter import messagebox
-from PIL import Image, ImageTk
-import ttkthemes
-
+from model.model_bd_usuarios import Modelo
 from view.vista_login import Login
-from controller.controlador_login import Controlador
 
+def run_login_app():
+    modelo_users = Modelo('data/base.db')
+    app = Login(modelo_users)
+    app.ventana.mainloop()
 
 if __name__ == "__main__":
-    app = Controlador()
+    run_login_app()
