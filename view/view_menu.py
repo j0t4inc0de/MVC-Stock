@@ -23,6 +23,8 @@ class VistaPrincipal:
         # boton para actualizar la tabal
         ttk.Button(self.ventanaPrincipal, text="Actualizar", command=self.mostrar_datos).pack(pady=10)
         ttk.Button(self.ventanaPrincipal, text="Añadir Producto", command=self.abrir_vista_producto).pack(pady=10)
+        
+
 
         # Rodrigo- Se agrega la imagen para boton actualizar
         self.imagen_actualizar = Image.open("view/images/Actualizar24px.png")
@@ -35,6 +37,20 @@ class VistaPrincipal:
         self.imagen_anadir.thumbnail((250, 250))
         self.imagen_anadir = ImageTk.PhotoImage(self.imagen_anadir)
         self.label_anadir = ttk.Button(self.ventanaPrincipal, image=self.imagen_anadir).place(x=600,y=338)
+
+        # Rodrigo Se agrega la imagen para boton Eliminar.
+        self.imagen_eliminar = Image.open("view/images/Eliminar.png")
+        self.imagen_eliminar.thumbnail((250, 250))
+        self.imagen_eliminar = ImageTk.PhotoImage(self.imagen_eliminar)
+        self.label_eliminar = ttk.Button(self.ventanaPrincipal, image=self.imagen_eliminar).place(x=600,y=289)
+
+        # Rodrigo Se agrega la imagen para boton Editar.
+        self.imagen_editar = Image.open("view/images/Editar.png")
+        self.imagen_editar.thumbnail((250, 250))
+        self.imagen_editar = ImageTk.PhotoImage(self.imagen_editar)
+        self.label_editar = ttk.Button(self.ventanaPrincipal, image=self.imagen_editar).place(x=100,y=289)
+
+
         # Imagen Lupa
         self.imagen_buscar = Image.open("view/images/Buscar24px.png")
         self.imagen_buscar.thumbnail((250, 250))
