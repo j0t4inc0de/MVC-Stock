@@ -39,3 +39,99 @@ class ModeloStock:
         resultado = self.cursor.fetchone()
         self.conn.commit()
         return resultado
+    
+
+
+class ModeloStock_dos:
+    def __init__(self, db_path):
+        self.conn = sqlite3.connect(db_path)
+        self.cursor = self.conn.cursor()
+        
+        
+    def get_existencias(self):
+        self.cursor.execute("SELECT nombre FROM Existencia")
+        return [existencia[0] for existencia in self.cursor.fetchall()]
+
+    def get_cantidad_existente(self, id_existencia):
+        self.cursor.execute("SELECT cantidad FROM Existencia WHERE id_existencia=?", (id_existencia,))
+        cantidad = self.cursor.fetchone()
+        return cantidad[0] if cantidad is not None else None
+
+    def get_estados(self):
+        self.cursor.execute("SELECT nombre FROM Estado")
+        return [state[0] for state in self.cursor.fetchall()]
+    
+    def get_categorias(self):
+        self.cursor.execute("SELECT nombre FROM Categoria")
+        return [state[0] for state in self.cursor.fetchall()]
+    
+    def get_tipo_movimientos(self):
+        self.cursor.execute("SELECT nombre FROM TipoMovimiento")
+        return [tipo_mov[0] for tipo_mov in self.cursor.fetchall()]
+
+    def add_producto(self, nombre, id_estado, precio, cantidad, id_categoria):
+        self.cursor.execute("INSERT INTO Producto (nombre, id_estado, precio, id_categoria) VALUES (?, ?, ?, ?)",
+                            (nombre, id_estado, precio, id_categoria))
+        self.cursor.execute("INSERT INTO Existencia (nombre, cantidad) VALUES (?, ?)", (nombre, cantidad))
+        self.conn.commit()
+
+    def obtener_datos(self):
+        self.cursor.execute("""
+            SELECT Producto.nombre, Producto.precio, Existencia.cantidad, Estado.nombre, Categoria.nombre
+            FROM Producto
+            JOIN Existencia ON Producto.nombre = Existencia.nombre
+            JOIN Estado ON Producto.id_estado = Estado.id_estado
+            JOIN Categoria ON Producto.id_categoria = Categoria.id_categoria
+        """)
+        return self.cursor.fetchall()
+
+    def verificar_credenciales(self, usuario, contraseña):
+        self.cursor.execute("SELECT * FROM usuarios WHERE usuario = ? AND contrasena = ?", (usuario, contraseña))
+        resultado = self.cursor.fetchone()
+        self.conn.commit()
+        return resultado
+ 
+
+    def update_existencia_cantidad(self, id_existencia, nueva_cantidad):
+        self.cursor.execute("UPDATE Existencia SET cantidad=? WHERE id_existencia=?", (nueva_cantidad, id_existencia))
+        self.conn.commit()
+
+
+    def add_existencia(self, nombre_producto, cantidad, id_existencia):
+        self.cursor.execute("INSERT INTO Existencia (nombre, cantidad, id_existencia) VALUES (?, ?, ?)",
+                            (nombre_producto, cantidad, id_existencia))
+        self.conn.commit()
+
+    def get_existencia_data(self):
+        self.cursor.execute("SELECT nombre, cantidad FROM Existencia")
+        return [existencia[0] for existencia in self.cursor.fetchall()]
+
+    def get_tipo_movimientos(self):
+        self.cursor.execute("SELECT nombre FROM TipoMovimiento")
+        return [tipo_mov[0] for tipo_mov in self.cursor.fetchall()]
+
+    def get_tipomov_data(self):
+        self.cursor.execute("SELECT nombre, id_tipomov FROM TipoMovimiento")
+        return self.cursor.fetchall()
+
+ 
+    def add_movimiento(self, id_tipomov, id_existencia, descripcion, fecha, cantidad_movimientos):
+        # Obtener la cantidad existente antes del movimiento
+        cantidad_existente = self.get_cantidad_existente(id_existencia)
+
+        # Actualizar la cantidad en la tabla Existencia
+        nueva_cantidad_existente = cantidad_existente + cantidad_movimientos
+        self.cursor.execute("UPDATE Existencia SET cantidad=? WHERE id_existencia=?", (nueva_cantidad_existente, id_existencia))
+
+        # Agregar el nuevo movimiento
+        self.cursor.execute("""
+            INSERT INTO Movimientos (id_tipomov, id_existencia, descripcion, fecha_mov, cantidad_mov)
+            VALUES (?, ?, ?, ?, ?)
+        """, (id_tipomov, id_existencia, descripcion, fecha, cantidad_movimientos))
+
+        self.conn.commit()
+
+
+    def get_movimiento_data(self):
+        self.cursor.execute("SELECT  id_tipomov, id_existencia, cantidad_existencia, descripcion, fecha_mov, cantidad_mov FROM Movimiento")
+        return self.cursor.fetchall()

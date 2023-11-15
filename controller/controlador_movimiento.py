@@ -1,13 +1,7 @@
-import sqlite3
-from tkinter import Menu
-import tkinter as tk
-from tkinter import messagebox as mb
-import customtkinter
-from PIL import Image, ImageTk
-
+from model.model_bd_stock import ModeloStock_dos
 from view.vista_movimiento import VistaMovimiento
-
-class ContorladorMovimiento:
-    def __init__(self, movimiento):
-        self.movimiento = VistaMovimiento(movimiento)
-        self.movimiento = movimiento  # Guardamos una referencia a la ventana raíz
+class Controlador:
+    def __init__(self):
+        self.modelo_stock = ModeloStock_dos('data/base.db')
+        self.vista_movimiento =VistaMovimiento (None, self.modelo_stock)
+        self.vista_movimiento.ventanaMovimiento.mainloop()
