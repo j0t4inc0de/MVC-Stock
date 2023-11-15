@@ -50,7 +50,6 @@ class VistaPrincipal:
         self.imagen_editar = ImageTk.PhotoImage(self.imagen_editar)
         self.label_editar = ttk.Button(self.ventanaPrincipal, image=self.imagen_editar).place(x=100,y=289)
 
-
         # Imagen Lupa
         self.imagen_buscar = Image.open("view/images/Buscar24px.png")
         self.imagen_buscar.thumbnail((250, 250))
