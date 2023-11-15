@@ -11,8 +11,8 @@ class  VistaProducto:
         # self.ventanaProducto = ThemedTk(themebg=True)
         # self.ventanaProducto.set_theme('black')
         # funcion para mayor edicion sobre el tema -> self.ventanaProducto.set_theme_advanced(theme_name="dark")
-        self.ventanaProducto.title("Gestión de Stock")
-        self.ventanaProducto.geometry("400x350")
+        self.ventanaProducto.title("Agregando producto")
+        self.ventanaProducto.geometry("310x300")
         self.modelo_stock = modelo_stock
         
         self.select_state = tk.StringVar() # Se crea la variable para estado
@@ -42,7 +42,7 @@ class  VistaProducto:
         self.category_combobox.grid(row=4, column=1, padx=10, pady=10)
         self.populate_category_combobox()
 
-        ttk.Button(self.ventanaProducto, text="Listo", command=self.add_product).grid(row=5, column=0, columnspan=2, pady=10) # Boton 'Listo' que llama la funcion para añadir los productos
+        ttk.Button(self.ventanaProducto, text="Listo", command=self.add_product).place(x=154, y=250) # Boton 'Listo' que llama la funcion para añadir los productos
 
     def populate_state_combobox(self):
         states = self.modelo_stock.get_estados() # Saca el estado de la base de datos
