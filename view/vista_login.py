@@ -6,11 +6,11 @@ from PIL import Image, ImageTk
 from ttkthemes import ThemedTk
 
 class Login:
-    def __init__(self, modelo_users):
+    def __init__(self, ventana, modelo_stock):
         self.ventana = ThemedTk(theme="arc")
         self.ventana.title("AlaNorte")
         self.ventana.geometry("400x600")
-        self.modelo_users=modelo_users
+        self.modelo_stock = modelo_stock
         self.ventana.resizable(width=False, height=False)
 
         # Logo
@@ -29,6 +29,9 @@ class Login:
         self.entry_contraseña.place(x=130, y=340)
         
         # Boton 'Ingresar'
-        self.btn_ingresar = ttk.Button(self.ventana, text="Ingresar")
+        self.btn_ingresar = ttk.Button(self.ventana, text="Ingresar", command=self.verificar_ingreso)
         self.btn_ingresar.place(x=159, y=390)
     
+    def verificar_ingreso(self):
+        # Método ya definido en la sección 2
+        pass

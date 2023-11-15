@@ -3,7 +3,6 @@
 import sqlite3
 import tkinter as tk
 from tkinter import messagebox as mb
-import customtkinter
 from PIL import Image, ImageTk
 # Modelo
 class ModeloStock:
@@ -34,3 +33,9 @@ class ModeloStock:
             JOIN Categoria ON Producto.id_categoria = Categoria.id_categoria
         """)
         return self.cursor.fetchall()
+
+    def verificar_credenciales(self, usuario, contraseña):
+        self.cursor.execute("SELECT * FROM usuarios WHERE usuario = ? AND contrasena = ?", (usuario, contraseña))
+        resultado = self.cursor.fetchone()
+        self.conn.commit()
+        return resultado
