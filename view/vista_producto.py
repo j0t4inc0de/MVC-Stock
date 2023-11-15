@@ -44,7 +44,7 @@ class  VistaProducto:
         self.category_combobox.grid(row=4, column=1, padx=10, pady=10)
         self.populate_category_combobox()
 
-        ttk.Button(self.ventanaProducto, text="Agregar Producto", command=self.add_product).grid(row=5, column=0, columnspan=2, pady=10)
+        ttk.Button(self.ventanaProducto, text="Listo", command=self.add_product).grid(row=5, column=0, columnspan=2, pady=10)
 
     def populate_state_combobox(self):
         states = self.modelo_stock.get_estados()
