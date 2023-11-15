@@ -12,7 +12,6 @@ class Login:
         self.ventana.geometry("400x600")
         self.modelo_stock = modelo_stock
         self.ventana.resizable(width=False, height=False)
-
         # Logo
         self.ruta_imagen_logo = "view/images/logo.png"
         self.logo = Image.open(self.ruta_imagen_logo)
@@ -32,6 +31,5 @@ class Login:
         self.btn_ingresar = ttk.Button(self.ventana, text="Ingresar", command=self.verificar_ingreso)
         self.btn_ingresar.place(x=159, y=390)
     
-    def verificar_ingreso(self):
-        # Método ya definido en la sección 2
+    def verificar_ingreso(self): # Esta funcion dentro de esta vista no hace nada pero si se borra no funcionara la funcion echa en el controlador con el mismo nombre NO BORRREN LOCO
         pass

@@ -1,8 +1,9 @@
-# Main Login
+# Main Login - login_main.py
 
-# pip install ttkthemes
-# pip install pillow
-# pip install packaging
+# Instalaciones de modulos necesarias para el programa.
+    # pip install ttkthemes
+    # pip install pillow
+    # pip install packaging
 import sqlite3
 from PIL import Image, ImageTk
 from ttkthemes import ThemedTk

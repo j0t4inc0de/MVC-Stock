@@ -6,20 +6,18 @@ from ttkthemes import ThemedTk
 
 class  VistaProducto:
     def __init__(self, ventanaProducto, modelo_stock):
-
         self.ventanaProducto = ThemedTk(theme="arc")
-        #Rodrigo - agregue esto por si el temas sera en negro
+        # agregue esto por si el tema sera en negro
         # self.ventanaProducto = ThemedTk(themebg=True)
         # self.ventanaProducto.set_theme('black')
-        #Rodrigo- funcion para mayor edicion sobre el tema -> self.ventanaProducto.set_theme_advanced(theme_name="dark")
-        #.
+        # funcion para mayor edicion sobre el tema -> self.ventanaProducto.set_theme_advanced(theme_name="dark")
         self.ventanaProducto.title("Gestión de Stock")
         self.ventanaProducto.geometry("400x350")
         self.modelo_stock = modelo_stock
         
-        self.select_state = tk.StringVar()
-        self.select_category = tk.StringVar()
-        self.crear_formulario()
+        self.select_state = tk.StringVar() # Se crea la variable para estado
+        self.select_category = tk.StringVar() # Se crea la variable para categoria
+        self.crear_formulario() # Se llama el formulario para mostrar los botones y entrys del mismo
 
     def crear_formulario(self):
         ttk.Label(self.ventanaProducto, text="Nombre del Producto:").grid(row=0, column=0, padx=10, pady=10)
@@ -44,22 +42,22 @@ class  VistaProducto:
         self.category_combobox.grid(row=4, column=1, padx=10, pady=10)
         self.populate_category_combobox()
 
-        ttk.Button(self.ventanaProducto, text="Listo", command=self.add_product).grid(row=5, column=0, columnspan=2, pady=10)
+        ttk.Button(self.ventanaProducto, text="Listo", command=self.add_product).grid(row=5, column=0, columnspan=2, pady=10) # Boton 'Listo' que llama la funcion para añadir los productos
 
     def populate_state_combobox(self):
-        states = self.modelo_stock.get_estados()
-        self.state_combobox['values'] = states
+        states = self.modelo_stock.get_estados() # Saca el estado de la base de datos
+        self.state_combobox['values'] = states  # Le pone la lista de estados
 
     def populate_category_combobox(self):
-        categories = self.modelo_stock.get_categorias()
-        self.category_combobox['values'] = categories
+        categories = self.modelo_stock.get_categorias()  # Saca las categorias de la base de datos
+        self.category_combobox['values'] = categories # Le pone la lista de categorias
 
-    def add_product(self):
+    def add_product(self): #  se encarga de agregar un nuevo producto al modelo
         selected_state_name = self.state_combobox.get()
-        state_id = self.get_state_id(selected_state_name)
+        state_id = self.get_state_id(selected_state_name) #  Utiliza el nombre del estado para obtener el ID usa la funcion de abajo 'def get_state_id'
 
         selected_category_name = self.category_combobox.get()
-        category_id = self.get_category_id(selected_category_name)
+        category_id = self.get_category_id(selected_category_name) #  Utiliza el nombre de la categoria para obtener el ID usa la funcion de abajo 'def get_category_id'
 
         product_name = self.entry_nombre_producto.get()
         product_price = float(self.entry_precio_producto.get())
@@ -67,17 +65,18 @@ class  VistaProducto:
         product_cantidad = self.entry_cantidad_producto.get()
         product_cantidad = int(self.entry_cantidad_producto.get())
 
-        self.modelo_stock.add_producto(product_name, state_id, product_price, product_cantidad, category_id)
+        self.modelo_stock.add_producto(product_name, state_id, product_price, product_cantidad, category_id) # Utiliza la funcion del modelo para insertar los datos obtenidos en las anteriores lineas
 
+        # Estas lineas limpian los campos
         self.entry_nombre_producto.delete(0, tk.END)
         self.entry_precio_producto.delete(0, tk.END)
         self.entry_cantidad_producto.delete(0, tk.END)
         self.state_combobox.set("")
         self.category_combobox.set("")
 
-    def get_state_id(self, state_name):
+    def get_state_id(self, state_name): #  Ejecuta una consulta SQL en la tabla Estado para obtener el ID del estado donde el nombre del estado coincide con el valor state_name
         self.modelo_stock.cursor.execute("SELECT id_estado FROM Estado WHERE nombre=?", (state_name,))
         return self.modelo_stock.cursor.fetchone()[0]
-    def get_category_id(self, category_name):
+    def get_category_id(self, category_name): #  Ejecuta una consulta SQL en la tabla Categoria para obtener el ID de la categoria donde el nombre del estado coincide con el valor category_name
         self.modelo_stock.cursor.execute("SELECT id_categoria FROM Categoria WHERE nombre=?", (category_name,))
         return self.modelo_stock.cursor.fetchone()[0]
