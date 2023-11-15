@@ -40,12 +40,12 @@ class Controlador:
                 mb.showerror('Acceso Denegado', 'Usuario/Contraseña incorrectos.')
 
     def mostrar_gestion_stock(self):
-        from view.vista_gestion_stock import GestionStock
+        from view.view_menu import VistaPrincipal
         top = tk.Toplevel()
-        self.vista_gestion_stock = GestionStock(top, self)
+        self.vista_menu = VistaPrincipal(top, self)
         top.deiconify()
         top.protocol("WM_DELETE_WINDOW", self.cerrar_aplicacion)
-        print("Se abrió gestion stock")
+        print("Se abrió 'view_menu.py' ")
     
     def cerrar_aplicacion(self):
     # cierre de la aplicación
