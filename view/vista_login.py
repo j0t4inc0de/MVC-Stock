@@ -24,7 +24,7 @@ class Login:
         self.entry_usuario.place(x=130, y=290)
 
         ttk.Label(self.ventana, text="Contraseña:").place(x=130, y=320)
-        self.entry_contraseña = ttk.Entry(self.ventana)
+        self.entry_contraseña = ttk.Entry(self.ventana,show="*")
         self.entry_contraseña.place(x=130, y=340)
         
         # Boton 'Ingresar'
