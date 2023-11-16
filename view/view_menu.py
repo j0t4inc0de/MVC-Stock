@@ -36,7 +36,7 @@ class VistaPrincipal:
         self.imagen_mov.thumbnail((30, 30))
         self.imagen_mov.resize((30, 30))
         self.imagen_mov = ImageTk.PhotoImage(self.imagen_mov)
-        self.label_mov = ttk.Button(self.ventanaPrincipal, image=self.imagen_mov).place(x=630,y=0)
+        self.label_mov = ttk.Button(self.ventanaPrincipal, image=self.imagen_mov, command=self.abrir_vista_movimiento).place(x=630,y=0)
 
         # Imagen Lupa
         self.imagen_buscar = Image.open("view/images/buscar-512px.png")
@@ -90,6 +90,12 @@ class VistaPrincipal:
         vista_producto = VistaProducto(self.ventanaPrincipal, self.modelo_stock)
         vista_producto.ventanaProducto.grab_set()
         vista_producto.ventanaProducto.wait_window(vista_producto.ventanaProducto)
+        
+    def abrir_vista_movimiento(self):
+        from view.vista_movimiento import VistaMovimiento
+        vista_movimietno = VistaMovimiento(self.ventanaPrincipal,self.modelo_stock)
+        vista_movimietno.ventanaMovimiento.grab_set()
+        vista_movimietno.ventanaMovimiento.wait_window(vista_movimietno.ventanaMovimiento)
 
     def ejecutar(self):
         self.ventanaPrincipal.mainloop()
