@@ -29,6 +29,14 @@ class VistaPrincipal:
         self.entry_buscar = ttk.Entry(self.ventanaPrincipal, width=46)
         self.entry_buscar.place(x=0, y=18)
 
+
+        # Boton Movimientos
+        self.imagen_mov = Image.open("view/images/movimientos-512px.png")
+        self.imagen_mov.thumbnail((30, 30))
+        self.imagen_mov.resize((30, 30))
+        self.imagen_mov = ImageTk.PhotoImage(self.imagen_mov)
+        self.label_mov = ttk.Button(self.ventanaPrincipal, image=self.imagen_mov).place(x=630,y=0)
+
         # Imagen Lupa
         self.imagen_buscar = Image.open("view/images/buscar-512px.png")
         self.imagen_buscar.thumbnail((30, 30))
