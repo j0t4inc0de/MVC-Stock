@@ -8,6 +8,7 @@ class VistaPrincipal:
         self.ventanaPrincipal = ThemedTk(theme="arc")
         self.ventanaPrincipal.title("Gestión de Stock")
         self.ventanaPrincipal.geometry("1100x430")
+        self.ventanaPrincipal.resizable(width=False, height=False)
         self.modelo_stock = modelo_stock
 
         # Treeview es la tabla donde pondremos los datos de la bd
