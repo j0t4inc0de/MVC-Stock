@@ -30,36 +30,36 @@ class VistaPrincipal:
         self.entry_buscar = ttk.Entry(self.ventanaPrincipal, width=46)
         self.entry_buscar.place(x=0, y=18)
 
-
-        # Boton Movimientos
+        # Botones
+        # Movimientos
         self.imagen_mov = Image.open("view/images/movimientos-512px.png")
         self.imagen_mov.thumbnail((30, 30))
         self.imagen_mov.resize((30, 30))
         self.imagen_mov = ImageTk.PhotoImage(self.imagen_mov)
         self.label_mov = ttk.Button(self.ventanaPrincipal, image=self.imagen_mov, command=self.abrir_vista_movimiento).place(x=630,y=0)
 
-        # Imagen Lupa
+        # Buscar
         self.imagen_buscar = Image.open("view/images/buscar-512px.png")
         self.imagen_buscar.thumbnail((30, 30))
         self.imagen_buscar.resize((30, 30))
         self.imagen_buscar = ImageTk.PhotoImage(self.imagen_buscar)
         self.label_buscar = ttk.Button(self.ventanaPrincipal, image=self.imagen_buscar).place(x=295,y=0)
 
-        # Rodrigo- Se agrega la imagen para boton actualizar
+        # Actualizar
         self.imagen_actualizar = Image.open("view/images/actualizar-512px.png")
         self.imagen_actualizar.thumbnail((30, 30))
         self.imagen_actualizar.resize((30, 30))
         self.imagen_actualizar = ImageTk.PhotoImage(self.imagen_actualizar)
         self.label_actualizar = ttk.Button(self.ventanaPrincipal, image=self.imagen_actualizar, command=self.mostrar_datos).place(x=360,y=0)
         
-        # Rodrigo- Se agrega la imagen para boton Añadir.
+        # Añadir.
         self.imagen_anadir = Image.open("view/images/añadir-512px.png")
         self.imagen_anadir.thumbnail((30, 30))
         self.imagen_anadir.resize((30, 30))
         self.imagen_anadir = ImageTk.PhotoImage(self.imagen_anadir)
         self.label_anadir = ttk.Button(self.ventanaPrincipal, image=self.imagen_anadir, command=self.abrir_vista_producto).place(x=450,y=0)
 
-        # Rodrigo Se agrega la imagen para boton Eliminar.
+        # Eliminar.
         self.imagen_eliminar = Image.open("view/images/eliminar-512px.png")
         self.imagen_eliminar.thumbnail((30, 30))
         self.imagen_eliminar.resize((30, 30))
@@ -67,7 +67,7 @@ class VistaPrincipal:
         self.imagen_eliminar = ImageTk.PhotoImage(self.imagen_eliminar)
         self.label_eliminar = ttk.Button(self.ventanaPrincipal, image=self.imagen_eliminar).place(x=510,y=0)
 
-        # Rodrigo Se agrega la imagen para boton Editar.
+        # Editar.
         self.imagen_editar = Image.open("view/images/editar-512px.png")
         self.imagen_editar.thumbnail((30, 30))
         self.imagen_editar.resize((30, 30))
