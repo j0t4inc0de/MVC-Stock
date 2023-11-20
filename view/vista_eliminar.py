@@ -71,3 +71,5 @@ class  VistaEliminar:
         existencia_id = self.get_existencia_id(selected_existencia)
 
         self.modelo_stock.del_producto(existencia_id)
+        self.existencia_combobox.set("")
+        self.entry_cantidad_existencia.delete(0, tk.END)
