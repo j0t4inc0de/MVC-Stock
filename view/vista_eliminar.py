@@ -10,7 +10,6 @@ class  VistaEliminar:
         self.ventanaDel.title("Eliminando producto")
         self.ventanaDel.geometry("310x300")
         self.modelo_stock = modelo_stock
-        
         self.crear_formulario() # Se llama el formulario para mostrar los botones y entrys del mismo
 
     def crear_formulario(self):
@@ -24,7 +23,6 @@ class  VistaEliminar:
         self.entry_cantidad_existencia.grid(row=3, column=1, padx=10, pady=10 )
 
         ttk.Button(self.ventanaDel, text="Eliminar", command=self.del_producto).place(x=154, y=250)
-
 
     def get_existencia_id(self, existencia_name):
         self.modelo_stock.cursor.execute("SELECT id_existencia FROM Existencia WHERE nombre=?", (existencia_name,))

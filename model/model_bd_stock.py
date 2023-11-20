@@ -98,7 +98,6 @@ class ModeloStock:
 
         self.conn.commit()
 
-
     def get_movimiento_data(self):
         self.cursor.execute("SELECT  id_tipomov, id_existencia, cantidad_existencia, descripcion, fecha_mov, cantidad_mov FROM Movimiento")
         return self.cursor.fetchall()
