@@ -40,7 +40,10 @@ class ModeloStock:
         self.conn.commit()
         return resultado
     
-       
+    def del_producto(self, id_existencia):
+        self.cursor.execute("DELETE FROM Movimientos WHERE id_existencia = ?", (id_existencia,))
+        self.cursor.execute("DELETE FROM Existencia WHERE id_existencia = ?", (id_existencia,))
+        self.conn.commit()
         
     def get_existencias(self):
         self.cursor.execute("SELECT nombre FROM Existencia")

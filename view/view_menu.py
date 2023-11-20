@@ -63,15 +63,13 @@ class VistaPrincipal:
         self.imagen_eliminar = Image.open("view/images/eliminar-512px.png")
         self.imagen_eliminar.thumbnail((30, 30))
         self.imagen_eliminar.resize((30, 30))
-
         self.imagen_eliminar = ImageTk.PhotoImage(self.imagen_eliminar)
-        self.label_eliminar = ttk.Button(self.ventanaPrincipal, image=self.imagen_eliminar).place(x=510,y=0)
+        self.label_eliminar = ttk.Button(self.ventanaPrincipal, image=self.imagen_eliminar, command=self.abrir_vista_del).place(x=510,y=0)
 
         # Editar.
         self.imagen_editar = Image.open("view/images/editar-512px.png")
         self.imagen_editar.thumbnail((30, 30))
         self.imagen_editar.resize((30, 30))
-
         self.imagen_editar = ImageTk.PhotoImage(self.imagen_editar)
         self.label_editar = ttk.Button(self.ventanaPrincipal, image=self.imagen_editar).place(x=570,y=0)
 
@@ -97,5 +95,11 @@ class VistaPrincipal:
         vista_movimietno.ventanaMovimiento.grab_set()
         vista_movimietno.ventanaMovimiento.wait_window(vista_movimietno.ventanaMovimiento)
 
+    def abrir_vista_del(self):
+        from view.vista_eliminar import VistaEliminar
+        vista_del = VistaEliminar(self.ventanaPrincipal, self.modelo_stock)
+        vista_del.ventanaDel.grab_set()
+        vista_del.ventanaDel.wait_window(vista_del.ventanaDel)
+        
     def ejecutar(self):
         self.ventanaPrincipal.mainloop()
