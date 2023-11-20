@@ -87,7 +87,6 @@ class VistaMovimiento:
         self.entry_fecha_movimiento.delete(0, tk.END)
         self.entry_cantidad_movimientos.delete(0, tk.END)
 
-
     def get_tipo_movimiento_id(self, tipo_movimiento_name):
         self.modelo_stock.cursor.execute("SELECT id_tipomov FROM TipoMovimiento WHERE nombre=?", (tipo_movimiento_name,))
         return self.modelo_stock.cursor.fetchone()[0]

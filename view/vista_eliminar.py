@@ -3,6 +3,7 @@ import tkinter as tk
 from tkinter import Menu, ttk
 from tkinter import messagebox as mb
 from ttkthemes import ThemedTk
+from tkinter import simpledialog as sd
 
 class  VistaEliminar:
     def __init__(self, ventanaDel, modelo_stock):
@@ -13,14 +14,15 @@ class  VistaEliminar:
         self.crear_formulario() # Se llama el formulario para mostrar los botones y entrys del mismo
 
     def crear_formulario(self):
-        ttk.Label(self.ventanaDel, text="Producto:").grid(row=2, column=0, padx=10, pady=10)
+        ttk.Label(self.ventanaDel, text="Seleccione el producto:").place(x=1, y=5)
         self.existencia_combobox = ttk.Combobox(self.ventanaDel)
-        self.existencia_combobox.grid(row=2, column=1, padx=10, pady=10)
+        self.existencia_combobox.place(x=130, y=5)
         self.populate_existencia_combobox()
+        ttk.Label(self.ventanaDel, text="Informacion a eliminar").place(x=1, y=42)
 
-        ttk.Label(self.ventanaDel, text="Info Existencia:").grid(row=3, column=0, padx=10, pady=10)
+        ttk.Label(self.ventanaDel, text="Existencia:").place(x=1, y=72)
         self.entry_cantidad_existencia = ttk.Entry(self.ventanaDel)
-        self.entry_cantidad_existencia.grid(row=3, column=1, padx=10, pady=10 )
+        self.entry_cantidad_existencia.place(x=130, y=70)
 
         ttk.Button(self.ventanaDel, text="Eliminar", command=self.del_producto).place(x=154, y=250)
 
@@ -43,33 +45,24 @@ class  VistaEliminar:
             cantidad_existente = self.modelo_stock.get_cantidad_existente(existencia_id)  
             self.entry_cantidad_existencia.delete(0, tk.END)
             self.entry_cantidad_existencia.insert(0, str(cantidad_existente))
+            self.entry_cantidad_existencia.config(state="readonly")
+            self.entry_cantidad_existencia.icursor(0)
         else:
             print("ID de existencia no válido")
-
-    def add_movimiento(self):
-        selected_tipo_movimiento = self.tipo_movimiento_combobox.get()
-        tipo_movimiento_id = self.get_tipo_movimiento_id(selected_tipo_movimiento)
-
-        selected_existencia = self.existencia_combobox.get()
-        existencia_id = self.get_existencia_id(selected_existencia)
-
-        descripcion_movimiento = self.entry_descripcion_movimiento.get()
-        fecha_movimiento = self.entry_fecha_movimiento.get()
-        cantidad_movimientos = int(self.entry_cantidad_movimientos.get())
-
-        self.modelo_stock.add_movimiento(tipo_movimiento_id, existencia_id, descripcion_movimiento, fecha_movimiento, cantidad_movimientos)
-
-        self.tipo_movimiento_combobox.set("")
-        self.existencia_combobox.set("")
-        self.entry_cantidad_existencia.delete(0, tk.END)
-        self.entry_descripcion_movimiento.delete(0, tk.END)
-        self.entry_fecha_movimiento.delete(0, tk.END)
-        self.entry_cantidad_movimientos.delete(0, tk.END)
 
     def del_producto(self):
         selected_existencia = self.existencia_combobox.get()
         existencia_id = self.get_existencia_id(selected_existencia)
 
         self.modelo_stock.del_producto(existencia_id)
-        self.existencia_combobox.set("")
-        self.entry_cantidad_existencia.delete(0, tk.END)
+        respuesta = mb.askokcancel("Confirmar eliminación", f"¿Seguro que quieres eliminar el producto {selected_existencia}?")
+
+        if respuesta:
+            # El usuario hizo clic en "Aceptar", proceder con la eliminación
+            self.modelo_stock.del_producto(existencia_id)
+            mb.showinfo("Éxito", "Producto eliminado con éxito.")
+            self.existencia_combobox.set("")
+            self.entry_cantidad_existencia.delete(0, tk.END)
+        else:
+            # El usuario hizo clic en "Cancelar"
+            mb.showinfo("Cancelado", "Operación de eliminación cancelada.")
