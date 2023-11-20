@@ -34,6 +34,11 @@ class ModeloStock:
         """)
         return self.cursor.fetchall()
 
+    def get_precio_producto(self, nombre_producto):
+        self.cursor.execute("SELECT precio FROM Producto WHERE nombre=?", (nombre_producto,))
+        precio = self.cursor.fetchone()
+        return precio[0] if precio is not None else None
+
     def verificar_credenciales(self, usuario, contraseña): # Query para verificar que los datos ingresados usuario/contraseña estan en la base de datos
         self.cursor.execute("SELECT * FROM usuarios WHERE usuario = ? AND contrasena = ?", (usuario, contraseña))
         resultado = self.cursor.fetchone()
