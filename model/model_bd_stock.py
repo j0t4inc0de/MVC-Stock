@@ -4,6 +4,7 @@ import sqlite3
 import tkinter as tk
 from tkinter import messagebox as mb
 from PIL import Image, ImageTk
+
 # Modelo
 class ModeloStock:
     def __init__(self, db_path):
