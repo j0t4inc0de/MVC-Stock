@@ -80,11 +80,9 @@ class ModeloStock:
         self.cursor.execute("SELECT nombre FROM TipoMovimiento")
         return [tipo_mov[0] for tipo_mov in self.cursor.fetchall()]
 
-
     def update_existencia_cantidad(self, id_existencia, nueva_cantidad):
         self.cursor.execute("UPDATE Existencia SET cantidad=? WHERE id_existencia=?", (nueva_cantidad, id_existencia))
         self.conn.commit()
-
 
     def add_existencia(self, nombre_producto, cantidad, id_existencia):
         self.cursor.execute("INSERT INTO Existencia (nombre, cantidad, id_existencia) VALUES (?, ?, ?)",
@@ -103,7 +101,6 @@ class ModeloStock:
         self.cursor.execute("SELECT nombre, id_tipomov FROM TipoMovimiento")
         return self.cursor.fetchall()
 
- 
     def add_movimiento(self, id_tipomov, id_existencia, descripcion, fecha, cantidad_movimientos):
         # Obtener la cantidad existente antes del movimiento
         cantidad_existente = self.get_cantidad_existente(id_existencia)
