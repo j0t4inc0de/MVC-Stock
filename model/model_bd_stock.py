@@ -44,7 +44,7 @@ class ModeloStock:
         resultado = self.cursor.fetchone()
         self.conn.commit()
         return resultado
-    # # Aqui se debe hacer las query con la base de datos para eliminar de las tablas, movimientos, existencia y producto. En ese orden ya que tienen foraneas
+    # # Aqui se debe hacer las query con la base de datos para eliminar de las tablas, movimientos, producto y existencia. En ese orden ya que tienen foraneas
     # def del_producto(self, id_existencia):
     #     self.cursor.execute("DELETE FROM Movimientos WHERE id_existencia = ?", (id_existencia,))
     #     self.cursor.execute("DELETE FROM Existencia WHERE id_existencia = ?", (id_existencia,))
@@ -62,8 +62,8 @@ class ModeloStock:
         else:
             # Si no hay movimientos, eliminar el producto
             self.cursor.execute("DELETE FROM Movimientos WHERE id_existencia = ?", (id_existencia,))
-            self.cursor.execute("DELETE FROM Existencia WHERE id_existencia = ?", (id_existencia,))
             self.cursor.execute("DELETE FROM Producto WHERE nombre = (SELECT nombre FROM Existencia WHERE id_existencia = ?)", (id_existencia,))
+            self.cursor.execute("DELETE FROM Existencia WHERE id_existencia = ?", (id_existencia,))
             self.conn.commit()
             mb.showinfo("Éxito", "Producto eliminado con éxito.")
             
