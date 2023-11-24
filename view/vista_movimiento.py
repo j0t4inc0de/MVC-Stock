@@ -22,12 +22,12 @@ class VistaMovimiento:
         self.tipo_movimiento_combobox.grid(row=1, column=1, padx=10, pady=10)
         self.populate_tipo_movimiento_combobox()
 
-        ttk.Label(self.ventanaMovimiento, text="Existencia:").grid(row=2, column=0, padx=10, pady=10)
+        ttk.Label(self.ventanaMovimiento, text="Producto:").grid(row=2, column=0, padx=10, pady=10)
         self.existencia_combobox = ttk.Combobox(self.ventanaMovimiento)
         self.existencia_combobox.grid(row=2, column=1, padx=10, pady=10)
         self.populate_existencia_combobox()
 
-        ttk.Label(self.ventanaMovimiento, text="Cantidad Existencia:").grid(row=3, column=0, padx=10, pady=10)
+        ttk.Label(self.ventanaMovimiento, text="Cantidad:").grid(row=3, column=0, padx=10, pady=10)
         self.entry_cantidad_existencia = ttk.Entry(self.ventanaMovimiento)
         self.entry_cantidad_existencia.grid(row=3, column=1, padx=10, pady=10 )
 
@@ -39,7 +39,7 @@ class VistaMovimiento:
         self.entry_fecha_movimiento = ttk.Entry(self.ventanaMovimiento)
         self.entry_fecha_movimiento.grid(row=5, column=1, padx=10, pady=10)
 
-        ttk.Label(self.ventanaMovimiento, text="Nueva Cantidad:").grid(row=6, column=0, padx=10, pady=10)
+        ttk.Label(self.ventanaMovimiento, text="Cantidad movida:").grid(row=6, column=0, padx=10, pady=10)
         self.entry_cantidad_movimientos = ttk.Entry(self.ventanaMovimiento)
         self.entry_cantidad_movimientos.grid(row=6, column=1, padx=10, pady=10)
 
@@ -64,6 +64,8 @@ class VistaMovimiento:
             cantidad_existente = self.modelo_stock.get_cantidad_existente(existencia_id)  
             self.entry_cantidad_existencia.delete(0, tk.END)
             self.entry_cantidad_existencia.insert(0, str(cantidad_existente))
+            self.entry_cantidad_existencia.config(state="readonly")
+            self.entry_cantidad_existencia.icursor(0)
         else:
             print("ID de existencia no válido")
 
@@ -86,6 +88,8 @@ class VistaMovimiento:
         self.entry_descripcion_movimiento.delete(0, tk.END)
         self.entry_fecha_movimiento.delete(0, tk.END)
         self.entry_cantidad_movimientos.delete(0, tk.END)
+
+        self.ventanaMovimiento.destroy()
 
     def get_tipo_movimiento_id(self, tipo_movimiento_name):
         self.modelo_stock.cursor.execute("SELECT id_tipomov FROM TipoMovimiento WHERE nombre=?", (tipo_movimiento_name,))
