@@ -69,7 +69,6 @@ class  VistaEliminar:
         if respuesta:
             # El usuario hizo clic en "Aceptar"
             self.modelo_stock.del_producto(existencia_id)
-            mb.showinfo("Éxito", "Producto eliminado con éxito.")
             self.ventanaDel.destroy()
         else:
             # El usuario hizo clic en "Cancelar"

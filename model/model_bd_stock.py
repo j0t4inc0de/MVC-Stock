@@ -45,11 +45,29 @@ class ModeloStock:
         self.conn.commit()
         return resultado
     
+    # # Aqui se debe hacer las query con la base de datos para eliminar de las tablas, movimientos, existencia y producto. En ese orden ya que tienen foraneas
+    # def del_producto(self, id_existencia):
+    #     self.cursor.execute("DELETE FROM Movimientos WHERE id_existencia = ?", (id_existencia,))
+    #     self.cursor.execute("DELETE FROM Existencia WHERE id_existencia = ?", (id_existencia,))
+    #     self.conn.commit()
+    def has_movimientos(self, id_existencia):
+        self.cursor.execute("SELECT COUNT(*) FROM Movimientos WHERE id_existencia=?", (id_existencia,))
+        count = self.cursor.fetchone()[0]
+        return count > 0
     def del_producto(self, id_existencia):
-        self.cursor.execute("DELETE FROM Movimientos WHERE id_existencia = ?", (id_existencia,))
-        self.cursor.execute("DELETE FROM Existencia WHERE id_existencia = ?", (id_existencia,))
-        self.conn.commit()
-        
+        if self.has_movimientos(id_existencia):
+            # Si hay movimientos, actualizar el estado a inactivo
+            self.cursor.execute("UPDATE Producto SET id_estado = 3 WHERE nombre = (SELECT nombre FROM Existencia WHERE id_existencia = ?)", (id_existencia,))
+            self.conn.commit()
+            mb.showinfo("Éxito", "Producto desactivado con éxito debido a la existencia de movimientos.")
+        else:
+            # Si no hay movimientos, eliminar el producto
+            self.cursor.execute("DELETE FROM Movimientos WHERE id_existencia = ?", (id_existencia,))
+            self.cursor.execute("DELETE FROM Existencia WHERE id_existencia = ?", (id_existencia,))
+            self.cursor.execute("DELETE FROM Producto WHERE nombre = (SELECT nombre FROM Existencia WHERE id_existencia = ?)", (id_existencia,))
+            self.conn.commit()
+            mb.showinfo("Éxito", "Producto eliminado con éxito.")
+            
     def get_existencias(self):
         self.cursor.execute("SELECT nombre FROM Existencia")
         return [existencia[0] for existencia in self.cursor.fetchall()]
