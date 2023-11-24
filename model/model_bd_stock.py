@@ -44,11 +44,7 @@ class ModeloStock:
         resultado = self.cursor.fetchone()
         self.conn.commit()
         return resultado
-    # # Aqui se debe hacer las query con la base de datos para eliminar de las tablas, movimientos, producto y existencia. En ese orden ya que tienen foraneas
-    # def del_producto(self, id_existencia):
-    #     self.cursor.execute("DELETE FROM Movimientos WHERE id_existencia = ?", (id_existencia,))
-    #     self.cursor.execute("DELETE FROM Existencia WHERE id_existencia = ?", (id_existencia,))
-    #     self.conn.commit()
+    
     def has_movimientos(self, id_existencia):
         self.cursor.execute("SELECT COUNT(*) FROM Movimientos WHERE id_existencia=?", (id_existencia,))
         count = self.cursor.fetchone()[0]
