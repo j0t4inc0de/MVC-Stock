@@ -73,6 +73,9 @@ class  VistaProducto:
         self.entry_cantidad_producto.delete(0, tk.END)
         self.state_combobox.set("")
         self.category_combobox.set("")
+        
+        #Rodrigo Cristobal: Se crea el mensaje al agregar un producto.
+        mb.showinfo("Listo", "Producto agregado.")
 
     def get_state_id(self, state_name): #  Ejecuta una consulta SQL en la tabla Estado para obtener el ID del estado donde el nombre del estado coincide con el valor state_name
         self.modelo_stock.cursor.execute("SELECT id_estado FROM Estado WHERE nombre=?", (state_name,))

@@ -90,6 +90,8 @@ class VistaMovimiento:
         self.entry_cantidad_movimientos.delete(0, tk.END)
 
         self.ventanaMovimiento.destroy()
+        #Rodrigo Cristobal: Se crea el mensaje al agregar un movimiento.
+        mb.showinfo("Listo", "Movimiento agregado.")
 
     def get_tipo_movimiento_id(self, tipo_movimiento_name):
         self.modelo_stock.cursor.execute("SELECT id_tipomov FROM TipoMovimiento WHERE nombre=?", (tipo_movimiento_name,))
