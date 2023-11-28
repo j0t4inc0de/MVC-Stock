@@ -66,7 +66,7 @@ class VistaPrincipal:
         self.imagen_editar.thumbnail((30, 30))
         self.imagen_editar.resize((30, 30))
         self.imagen_editar = ImageTk.PhotoImage(self.imagen_editar)
-        self.label_editar = ttk.Button(self.ventanaPrincipal, image=self.imagen_editar).place(x=570,y=2)
+        self.label_editar = ttk.Button(self.ventanaPrincipal, image=self.imagen_editar, command=self.abrir_vista_editar).place(x=570,y=2)
 
     def mostrar_datos(self):
         for item in self.treeview.get_children():
@@ -96,5 +96,13 @@ class VistaPrincipal:
         vista_del.ventanaDel.grab_set()
         vista_del.ventanaDel.wait_window(vista_del.ventanaDel)
         
+    def abrir_vista_editar(self):
+        from view.vista_editar import VistaEditar
+        vista_editar = VistaEditar(self.ventanaPrincipal, self.modelo_stock)
+        vista_editar.ventanaED.grab_set()
+        vista_editar.ventanaED.wait_window(vista_editar.ventanaED)
+        
     def ejecutar(self):
         self.ventanaPrincipal.mainloop()
+        
+    

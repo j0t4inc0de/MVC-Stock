@@ -117,3 +117,50 @@ class ModeloStock:
     def get_movimiento_data(self):
         self.cursor.execute("SELECT  id_tipomov, id_existencia, cantidad_existencia, descripcion, fecha_mov, cantidad_mov FROM Movimiento")
         return self.cursor.fetchall()
+    
+    def edit_producto(self, id_existencia, nueva_cantidad, nuevo_precio, nuevo_estado,nueva_categoria):
+        # Actualizar la cantidad en la tabla Existencia
+        self.cursor.execute("UPDATE Existencia SET cantidad=? WHERE id_existencia=?", (nueva_cantidad, id_existencia))
+        
+        self.cursor.execute("SELECT id_categoria FROM Categoria WHERE nombre=?", (nueva_categoria,))
+        id_categoria = self.cursor.fetchone()[0]
+
+        # Obtener el id del nuevo estado
+        self.cursor.execute("SELECT id_estado FROM Estado WHERE nombre=?", (nuevo_estado,))
+        result = self.cursor.fetchone()
+        if result is None:
+            print(f"No se encontró un estado con el nombre {nuevo_estado}")
+            return
+
+        id_estado = result[0]
+        # Actualizar el precio y el estado en la tabla Producto
+        self.cursor.execute("UPDATE Producto SET precio=?, id_estado=?, id_categoria=? WHERE nombre = (SELECT nombre FROM Existencia WHERE id_existencia = ?)", (nuevo_precio, id_estado, id_categoria, id_existencia))
+
+        self.conn.commit()
+
+    def get_estado_producto(self, nombre_producto):
+        self.cursor.execute("""
+            SELECT Estado.nombre
+            FROM Producto
+            JOIN Estado ON Producto.id_estado = Estado.id_estado
+            WHERE Producto.nombre=?
+        """, (nombre_producto,))
+        estado = self.cursor.fetchone()
+        return estado[0] if estado is not None else None
+    
+    def get_categoria_producto(self, nombre_producto):
+        self.cursor.execute("""
+            SELECT Categoria.nombre
+            FROM Producto
+            JOIN Categoria ON Producto.id_categoria = Categoria.id_categoria
+            WHERE Producto.nombre=?
+        """, (nombre_producto,))
+        categoria = self.cursor.fetchone()
+        return categoria[0] if categoria is not None else None
+    
+    def get_all_categorias(self):
+        self.cursor.execute("SELECT nombre FROM Categoria")
+        categorias = self.cursor.fetchall()
+        return [categoria[0] for categoria in categorias]
+    
+   
