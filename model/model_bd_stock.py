@@ -34,6 +34,15 @@ class ModeloStock:
             JOIN Categoria ON Producto.id_categoria = Categoria.id_categoria
         """)
         return self.cursor.fetchall()
+    
+    def obtener_datos_mov(self): # Obtiene todos los datos de esas tablas
+        self.cursor.execute("""
+            SELECT TipoMovimiento.nombre, Existencia.nombre, Existencia.cantidad, Movimientos.descripcion, Movimientos.fecha_mov, Movimientos.cantidad_mov
+            FROM Movimientos
+            JOIN Existencia ON Movimientos.id_existencia = Existencia.id_existencia
+            JOIN TipoMovimiento ON Movimientos.id_tipomov = TipoMovimiento.id_tipomov                                                         
+        """)
+        return self.cursor.fetchall()    
 
     def get_precio_producto(self, nombre_producto):
         self.cursor.execute("SELECT precio FROM Producto WHERE nombre=?", (nombre_producto,))

@@ -10,14 +10,26 @@ class VistaMenuMov:
         self.VentanaMovimiento.resizable(width=False, height=False)
         self.modelo_stock = modelo_stock
 
-        self.treeview = ttk.Treeview(self.VentanaMovimiento, columns=("Tipo", "Existencia", "Cantidad de existencia", "Descripción", "Fecha", "Cantidad de movimiento"), show="headings", height=16)
+        self.treeview = ttk.Treeview(self.VentanaMovimiento, columns=("Tipo", "Nombre", "Cantidad actual", "Descripción", "Fecha", "Cantidad de movimiento"), show="headings", height=16)
         self.treeview.heading("Tipo", text="Tipo")
-        self.treeview.heading("Existencia", text="Existencia")
-        self.treeview.heading("Cantidad de existencia", text="Cantidad de existencia")
+        self.treeview.heading("Nombre", text="Nombre")
+        self.treeview.heading("Cantidad actual", text="Cantidad actual")
         self.treeview.heading("Descripción", text="Descripción")
         self.treeview.heading("Fecha", text="Fecha")
         self.treeview.heading("Cantidad de movimiento", text="Cantidad de movimiento")
 
         self.treeview.place(x=0, y=50)
+        self.mostrar_datos_mov()
+        self.entry_buscar = ttk.Entry(self.VentanaMovimiento, width=46)
+        self.entry_buscar.place(x=1, y=19)
+        self.entry_buscar.insert(0, "Buscador")
 
+    def mostrar_datos_mov(self):
+        for item in self.treeview.get_children():
+            self.treeview.delete(item)
 
+        datos = self.modelo_stock.obtener_datos_mov() # obtiene los datos del model
+
+        # inserta los datos al treiview
+        for dato in datos:
+            self.treeview.insert("", "end", values=dato)
