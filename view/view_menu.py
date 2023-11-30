@@ -1,6 +1,6 @@
 # View Menu
 import tkinter as tk
-from tkinter import ttk
+from tkinter import ttk, Label, Button
 from ttkthemes import ThemedTk
 from PIL import Image, ImageTk
 class VistaPrincipal:
@@ -22,9 +22,7 @@ class VistaPrincipal:
         self.treeview.place(x=0, y=50)
 
         self.mostrar_datos()
-        self.entry_buscar = ttk.Entry(self.ventanaPrincipal, width=46)
-        self.entry_buscar.place(x=1, y=19)
-        self.entry_buscar.insert(0, "Buscador")
+
         # Botones
         # Movimientos
         self.imagen_mov = Image.open("view/images/movimientos-512px.png")
@@ -34,6 +32,10 @@ class VistaPrincipal:
         self.label_mov = ttk.Button(self.ventanaPrincipal, image=self.imagen_mov, command=self.abrir_vista_movimiento).place(x=630,y=2)
 
         # Buscar
+        #Entry del Buscar
+        self.entry_buscar = ttk.Entry(self.ventanaPrincipal, width=46)
+        self.entry_buscar.place(x=1, y=19)
+        self.entry_buscar.insert(0, "Buscador")
         self.imagen_buscar = Image.open("view/images/buscar-512px.png")
         self.imagen_buscar.thumbnail((30, 30))
         self.imagen_buscar.resize((30, 30))
@@ -84,11 +86,12 @@ class VistaPrincipal:
         vista_producto.ventanaProducto.grab_set()
         vista_producto.ventanaProducto.wait_window(vista_producto.ventanaProducto)
         
+    # Abre la vista menu movimiento
     def abrir_vista_movimiento(self):
-        from view.vista_movimiento import VistaMovimiento
-        vista_movimietno = VistaMovimiento(self.ventanaPrincipal,self.modelo_stock)
-        vista_movimietno.ventanaMovimiento.grab_set()
-        vista_movimietno.ventanaMovimiento.wait_window(vista_movimietno.ventanaMovimiento)
+        from view.vista_movimiento_menu import VistaMenuMov
+        vista_movimiento = VistaMenuMov(self.ventanaPrincipal, self.modelo_stock)
+        vista_movimiento.ventanaMenuMov.grab_set()
+        vista_movimiento.ventanaMenuMov.wait_window(vista_movimiento.ventanaMenuMov)
 
     def abrir_vista_del(self):
         from view.vista_eliminar import VistaEliminar

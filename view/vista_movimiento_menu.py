@@ -1,35 +1,33 @@
-#Rodrigo - Cristobal Creamos la vista menu movimiento.
-from tkinter import ttk
+import tkinter as tk
+from tkinter import ttk, Label, Button
+from tkinter import Button
 from ttkthemes import ThemedTk
+from PIL import Image, ImageTk
 
 class VistaMenuMov:
-    def __init__(self, modelo_stock):
-        self.VentanaMovimiento = ThemedTk(theme="arc")
-        self.VentanaMovimiento.title("Lista de Movimientos")
-        self.VentanaMovimiento.geometry("1230x500")
-        self.VentanaMovimiento.resizable(width=False, height=False)
+    def __init__(self, ventanaMenuMov, modelo_stock):
+        self.ventanaMenuMov = ThemedTk(theme="arc")
+        self.ventanaMenuMov.title("Lista de Movimientos")
+        self.ventanaMenuMov.geometry("1230x500")
+        self.ventanaMenuMov.resizable(width=False, height=False)
         self.modelo_stock = modelo_stock
 
-        self.treeview = ttk.Treeview(self.VentanaMovimiento, columns=("Tipo", "Nombre", "Cantidad actual", "Descripción", "Fecha", "Cantidad de movimiento"), show="headings", height=16)
-        self.treeview.heading("Tipo", text="Tipo")
-        self.treeview.heading("Nombre", text="Nombre")
-        self.treeview.heading("Cantidad actual", text="Cantidad actual")
-        self.treeview.heading("Descripción", text="Descripción")
-        self.treeview.heading("Fecha", text="Fecha")
-        self.treeview.heading("Cantidad de movimiento", text="Cantidad de movimiento")
+        self.treeviewMov = ttk.Treeview(self.ventanaMenuMov, columns=("Tipo", "Nombre", "Cantidad actual", "Descripción", "Fecha", "Movimiento"), show="headings", height=16)
+        self.treeviewMov.heading("Tipo", text="Tipo")
+        self.treeviewMov.heading("Nombre", text="Nombre")
+        self.treeviewMov.heading("Cantidad actual", text="Cantidad actual")
+        self.treeviewMov.heading("Descripción", text="Descripción")
+        self.treeviewMov.heading("Fecha", text="Fecha")
+        self.treeviewMov.heading("Movimiento", text="Movimiento")
+        self.treeviewMov.place(x=0, y=50)
 
-        self.treeview.place(x=0, y=50)
         self.mostrar_datos_mov()
-        self.entry_buscar = ttk.Entry(self.VentanaMovimiento, width=46)
-        self.entry_buscar.place(x=1, y=19)
-        self.entry_buscar.insert(0, "Buscador")
 
     def mostrar_datos_mov(self):
-        for item in self.treeview.get_children():
-            self.treeview.delete(item)
+        for item in self.treeviewMov.get_children():
+            self.treeviewMov.delete(item)
+        datos = self.modelo_stock.obtener_datos_mov()  # obtiene los datos del modelo
 
-        datos = self.modelo_stock.obtener_datos_mov() # obtiene los datos del model
-
-        # inserta los datos al treiview
+        # inserta los datos al treeviewMov
         for dato in datos:
-            self.treeview.insert("", "end", values=dato)
+            self.treeviewMov.insert("", "end", values=dato)
