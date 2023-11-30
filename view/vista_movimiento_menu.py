@@ -26,7 +26,7 @@ class VistaMenuMov:
         self.imagen_anadir.thumbnail((30, 30))
         self.imagen_anadir.resize((30, 30))
         self.imagen_anadir = ImageTk.PhotoImage(self.imagen_anadir)
-        self.label_anadir = ttk.Button(self.ventanaMenuMov, image=self.imagen_anadir, command=self.abrir_vista_movimiento).place(x=450,y=2)
+        self.label_anadir = ttk.Button(self.ventanaMenuMov, image=self.imagen_anadir, command=self.abrir_vista_movimiento).place(x=100,y=2)
 
         self.mostrar_datos_mov()
 
