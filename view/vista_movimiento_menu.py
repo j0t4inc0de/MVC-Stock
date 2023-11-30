@@ -21,12 +21,18 @@ class VistaMenuMov:
         self.treeviewMov.heading("Movimiento", text="Movimiento")
         self.treeviewMov.place(x=0, y=50)
 
-        # Cargar la imagen
+        # Boton imagen actualizar
+        self.imagen_actualizar = Image.open("view/images/actualizar-512px.png")
+        self.imagen_actualizar.thumbnail((30, 30))
+        self.imagen_actualizar.resize((30, 30))
+        self.imagen_actualizar = ImageTk.PhotoImage(self.imagen_actualizar)
+        self.label_actualizar = ttk.Button(self.ventanaMenuMov, image=self.imagen_actualizar, command=self.mostrar_datos_mov).place(x=5,y=2)
+        # Boton imagen añadir
         self.imagen_anadir = Image.open("view/images/añadir-512px.png")
         self.imagen_anadir.thumbnail((30, 30))
         self.imagen_anadir.resize((30, 30))
         self.imagen_anadir = ImageTk.PhotoImage(self.imagen_anadir)
-        self.label_anadir = ttk.Button(self.ventanaMenuMov, image=self.imagen_anadir, command=self.abrir_vista_movimiento).place(x=100,y=2)
+        self.label_anadir = ttk.Button(self.ventanaMenuMov, image=self.imagen_anadir, command=self.abrir_vista_movimiento).place(x=80,y=2)
 
         self.mostrar_datos_mov()
 
