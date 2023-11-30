@@ -88,8 +88,9 @@ class VistaPrincipal:
         
     # Abre la vista menu movimiento
     def abrir_vista_movimiento(self):
+        self.ventanaPrincipal.destroy()
         from view.vista_movimiento_menu import VistaMenuMov
-        vista_movimiento = VistaMenuMov(self.ventanaPrincipal, self.modelo_stock)
+        vista_movimiento = VistaMenuMov(self, self.modelo_stock)
         vista_movimiento.ventanaMenuMov.grab_set()
         vista_movimiento.ventanaMenuMov.wait_window(vista_movimiento.ventanaMenuMov)
 
