@@ -3,6 +3,7 @@ import tkinter as tk
 from tkinter import ttk, Label, Button
 from ttkthemes import ThemedTk
 from PIL import Image, ImageTk
+
 class VistaPrincipal:
     def __init__(self, modelo_stock):
         self.ventanaPrincipal = ThemedTk(theme="arc")
@@ -71,18 +72,19 @@ class VistaPrincipal:
         self.label_editar = ttk.Button(self.ventanaPrincipal, image=self.imagen_editar, command=self.abrir_vista_editar).place(x=570,y=2)
 
     def mostrar_datos(self):
+        # Llamada a la función obtener_datos del modelo_stock
+        datos = self.modelo_stock.obtener_datos()
+
         for item in self.treeview.get_children():
             self.treeview.delete(item)
-
-        datos = self.modelo_stock.obtener_datos() # obtiene los datos del model
-
-        # inserta los datos al treiview
+            
         for dato in datos:
             self.treeview.insert("", "end", values=dato)
+
             
     def abrir_vista_producto(self):
         from view.vista_producto import VistaProducto
-        vista_producto = VistaProducto(self.ventanaPrincipal, self.modelo_stock)
+        vista_producto = VistaProducto(self,self.modelo_stock)  
         vista_producto.ventanaProducto.grab_set()
         vista_producto.ventanaProducto.wait_window(vista_producto.ventanaProducto)
         
@@ -96,13 +98,13 @@ class VistaPrincipal:
 
     def abrir_vista_del(self):
         from view.vista_eliminar import VistaEliminar
-        vista_del = VistaEliminar(self.ventanaPrincipal, self.modelo_stock)
+        vista_del = VistaEliminar(self, self.modelo_stock)
         vista_del.ventanaDel.grab_set()
         vista_del.ventanaDel.wait_window(vista_del.ventanaDel)
         
     def abrir_vista_editar(self):
         from view.vista_editar import VistaEditar
-        vista_editar = VistaEditar(self.ventanaPrincipal, self.modelo_stock)
+        vista_editar = VistaEditar(self, self.modelo_stock)
         vista_editar.ventanaED.grab_set()
         vista_editar.ventanaED.wait_window(vista_editar.ventanaED)
         

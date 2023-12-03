@@ -6,10 +6,11 @@ from ttkthemes import ThemedTk
 from tkinter import simpledialog as sd
 
 class  VistaEliminar:
-    def __init__(self, ventanaDel, modelo_stock):
+    def __init__(self, vista_principal, modelo_stock):
         self.ventanaDel = ThemedTk(theme="arc")
         self.ventanaDel.title("Eliminando producto")
         self.ventanaDel.geometry("310x300")
+        self.vista_principal = vista_principal  # Se crea la variable para la vista principal
         self.modelo_stock = modelo_stock
         self.crear_formulario() # Se llama el formulario para mostrar los botones y entrys del mismo
 
@@ -69,6 +70,7 @@ class  VistaEliminar:
         if respuesta:
             # El usuario hizo clic en "Aceptar"
             self.modelo_stock.del_producto(existencia_id)
+            self.vista_principal.mostrar_datos()
             self.ventanaDel.destroy()
         else:
             # El usuario hizo clic en "Cancelar"

@@ -5,7 +5,7 @@ from tkinter import messagebox as mb
 from ttkthemes import ThemedTk
 
 class  VistaProducto:
-    def __init__(self, ventanaProducto, modelo_stock):
+    def __init__(self, vista_principal, modelo_stock):
         self.ventanaProducto = ThemedTk(theme="arc")
         # agregue esto por si el tema sera en negro
         # self.ventanaProducto = ThemedTk(themebg=True)
@@ -13,6 +13,7 @@ class  VistaProducto:
         # funcion para mayor edicion sobre el tema -> self.ventanaProducto.set_theme_advanced(theme_name="dark")
         self.ventanaProducto.title("Agregando producto")
         self.ventanaProducto.geometry("310x300")
+        self.vista_principal = vista_principal
         self.modelo_stock = modelo_stock
         
         self.select_state = tk.StringVar() # Se crea la variable para estado
@@ -74,8 +75,13 @@ class  VistaProducto:
         self.state_combobox.set("")
         self.category_combobox.set("")
         
+        
+        self.vista_principal.mostrar_datos() #  Actualiza la tabla de productos
+        
         #Rodrigo Cristobal: Se crea el mensaje al agregar un producto.
         mb.showinfo("Listo", "Producto agregado.")
+        
+        self.ventanaProducto.destroy() #  Cierra la ventana de agregar producto
 
     def get_state_id(self, state_name): #  Ejecuta una consulta SQL en la tabla Estado para obtener el ID del estado donde el nombre del estado coincide con el valor state_name
         self.modelo_stock.cursor.execute("SELECT id_estado FROM Estado WHERE nombre=?", (state_name,))

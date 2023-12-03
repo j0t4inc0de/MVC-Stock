@@ -7,10 +7,11 @@ from tkinter import simpledialog as sd
 
 
 class VistaEditar:
-    def __init__(self, ventanaED, modelo_stock):
+    def __init__(self, vista_principal, modelo_stock):
         self.ventanaED = ThemedTk(theme="arc")
         self.ventanaED.title("Editando producto")
         self.ventanaED.geometry("310x300")
+        self.vista_principal = vista_principal
         self.modelo_stock = modelo_stock
         self.crear_formulario()
 
@@ -84,5 +85,6 @@ class VistaEditar:
        
 
         self.modelo_stock.edit_producto(existencia_id, nueva_cantidad, nuevo_precio, nuevo_estado,nueva_categoria,)
+        self.vista_principal.mostrar_datos()
        
         self.ventanaED.destroy()
