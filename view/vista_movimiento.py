@@ -5,10 +5,11 @@ from tkinter import messagebox as mb
 from ttkthemes import ThemedTk
 
 class VistaMovimiento:
-    def __init__(self, ventanaMovimiento, modelo_stock):
+    def __init__(self, ventana_principal, modelo_stock):
         self.ventanaMovimiento = ThemedTk(theme="arc")
         self.ventanaMovimiento.title("Agregando movimiento")
         self.ventanaMovimiento.geometry("400x350")
+        self.ventana_principal = ventana_principal
         self.modelo_stock = modelo_stock
         
         self.select_tipo_movimiento = tk.StringVar()
@@ -90,6 +91,7 @@ class VistaMovimiento:
         self.entry_cantidad_movimientos.delete(0, tk.END)
 
         self.ventanaMovimiento.destroy()
+        self.ventana_principal.mostrar_datos_mov()
         #Rodrigo Cristobal: Se crea el mensaje al agregar un movimiento.
         mb.showinfo("Listo", "Movimiento agregado.")
 

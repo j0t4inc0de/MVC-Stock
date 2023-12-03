@@ -47,5 +47,7 @@ class VistaMenuMov:
 
     def abrir_vista_movimiento(self):
         from view.vista_movimiento import VistaMovimiento
-        app_movimiento = VistaMovimiento(self.ventanaMenuMov, self.modelo_stock)
+        vista_movimiento = VistaMovimiento(self, self.modelo_stock)
+        vista_movimiento.ventanaMovimiento.wait_window(vista_movimiento.ventanaMovimiento)
+        
         self.ventanaMenuMov.mainloop()
