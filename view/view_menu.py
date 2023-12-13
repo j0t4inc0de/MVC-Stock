@@ -37,6 +37,8 @@ class VistaPrincipal:
         self.entry_buscar = ttk.Entry(self.ventanaPrincipal, width=46)
         self.entry_buscar.place(x=1, y=19)
         self.entry_buscar.insert(0, "Buscador")
+        self.entry_buscar.bind('<FocusIn>', self.on_entry_click)
+        self.entry_buscar.bind('<FocusOut>', self.on_focusout)
         self.imagen_buscar = Image.open("view/images/buscar-512px.png")
         self.imagen_buscar.thumbnail((30, 30))
         self.imagen_buscar.resize((30, 30))
@@ -110,5 +112,16 @@ class VistaPrincipal:
         
     def ejecutar(self):
         self.ventanaPrincipal.mainloop()
-        
+
+    def on_entry_click(self, event):
+        """Function that gets called whenever entry is clicked"""
+        if self.entry_buscar.get() == 'Buscador':
+            self.entry_buscar.delete(0, "end")  # delete all the text in the entry
+            self.entry_buscar.insert(0, '')  # Insert blank for user input
+
+    def on_focusout(self, event):
+        if self.entry_buscar.get() == '':
+            self.entry_buscar.insert(0, 'Buscador')
+
+
     

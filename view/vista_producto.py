@@ -60,7 +60,7 @@ class  VistaProducto:
         selected_category_name = self.category_combobox.get()
         category_id = self.get_category_id(selected_category_name) #  Utiliza el nombre de la categoria para obtener el ID usa la funcion de abajo 'def get_category_id'
 
-        product_name = self.entry_nombre_producto.get()
+        product_name = self.entry_nombre_producto.get().lower()
         product_price = float(self.entry_precio_producto.get())
 
         product_cantidad = self.entry_cantidad_producto.get()
