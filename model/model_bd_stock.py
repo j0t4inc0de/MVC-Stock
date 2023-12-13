@@ -42,7 +42,18 @@ class ModeloStock:
             JOIN Existencia ON Movimientos.id_existencia = Existencia.id_existencia
             JOIN TipoMovimiento ON Movimientos.id_tipomov = TipoMovimiento.id_tipomov                                                         
         """)
-        return self.cursor.fetchall()    
+        return self.cursor.fetchall()
+
+    def buscar_nombre(self, nombre_buscador): # Busca el nombre en la base de datos
+        self.cursor.execute("""
+            SELECT Producto.nombre, Producto.precio, Existencia.cantidad, Estado.nombre, Categoria.nombre
+            FROM Producto
+            JOIN Existencia ON Producto.nombre = Existencia.nombre
+            JOIN Estado ON Producto.id_estado = Estado.id_estado
+            JOIN Categoria ON Producto.id_categoria = Categoria.id_categoria WHERE Producto.nombre =?""", (nombre_buscador,)
+            )
+        resultado = self.cursor.fetchall() 
+        return resultado  
 
     def get_precio_producto(self, nombre_producto):
         self.cursor.execute("SELECT precio FROM Producto WHERE nombre=?", (nombre_producto,))

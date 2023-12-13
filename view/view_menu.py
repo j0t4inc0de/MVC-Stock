@@ -23,7 +23,6 @@ class VistaPrincipal:
         self.treeview.place(x=0, y=50)
 
         self.mostrar_datos()
-
         # Botones
         # Movimientos
         self.imagen_mov = Image.open("view/images/movimientos-512px.png")
@@ -43,8 +42,7 @@ class VistaPrincipal:
         self.imagen_buscar.thumbnail((30, 30))
         self.imagen_buscar.resize((30, 30))
         self.imagen_buscar = ImageTk.PhotoImage(self.imagen_buscar)
-        self.label_buscar = ttk.Button(self.ventanaPrincipal, image=self.imagen_buscar).place(x=295,y=2)
-
+        self.label_buscar = ttk.Button(self.ventanaPrincipal, image=self.imagen_buscar, command=self.buscar_nombre).place(x=295,y=2)
         # Actualizar
         self.imagen_actualizar = Image.open("view/images/actualizar-512px.png")
         self.imagen_actualizar.thumbnail((30, 30))
@@ -83,7 +81,7 @@ class VistaPrincipal:
         for dato in datos:
             self.treeview.insert("", "end", values=dato)
 
-            
+    # Abre la vista       
     def abrir_vista_producto(self):
         from view.vista_producto import VistaProducto
         vista_producto = VistaProducto(self,self.modelo_stock)  
@@ -98,12 +96,14 @@ class VistaPrincipal:
         vista_movimiento.ventanaMenuMov.grab_set()
         vista_movimiento.ventanaMenuMov.wait_window(vista_movimiento.ventanaMenuMov)
 
+    # Abre la vista delete
     def abrir_vista_del(self):
         from view.vista_eliminar import VistaEliminar
         vista_del = VistaEliminar(self, self.modelo_stock)
         vista_del.ventanaDel.grab_set()
         vista_del.ventanaDel.wait_window(vista_del.ventanaDel)
         
+    # Abre la vista editar    
     def abrir_vista_editar(self):
         from view.vista_editar import VistaEditar
         vista_editar = VistaEditar(self, self.modelo_stock)
@@ -114,14 +114,26 @@ class VistaPrincipal:
         self.ventanaPrincipal.mainloop()
 
     def on_entry_click(self, event):
-        """Function that gets called whenever entry is clicked"""
         if self.entry_buscar.get() == 'Buscador':
-            self.entry_buscar.delete(0, "end")  # delete all the text in the entry
-            self.entry_buscar.insert(0, '')  # Insert blank for user input
+            self.entry_buscar.delete(0, "end")
+            self.entry_buscar.insert(0, '')
 
     def on_focusout(self, event):
         if self.entry_buscar.get() == '':
             self.entry_buscar.insert(0, 'Buscador')
 
+    def buscar_nombre(self): # Busca por nombre al apretar la lupa
+        global tree
+        nombre_buscador = self.entry_buscar.get().lower()
 
-    
+        if self.entry_buscar.get().lower() == ' ' or self.entry_buscar.get().lower() == '':
+            print("Se escribio un caracter, no un producto")
+            self.mostrar_datos()
+        else:
+            datos = self.modelo_stock.buscar_nombre(nombre_buscador)
+
+        for item in self.treeview.get_children():
+            self.treeview.delete(item)
+            
+        for dato in datos:
+            self.treeview.insert("", "end", values=dato)
