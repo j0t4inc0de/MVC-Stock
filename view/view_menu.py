@@ -1,6 +1,8 @@
 # View Menu
+import re
 import tkinter as tk
 from tkinter import ttk, Label, Button
+from tkinter import messagebox
 from ttkthemes import ThemedTk
 from PIL import Image, ImageTk
 
@@ -125,15 +127,26 @@ class VistaPrincipal:
     def buscar_nombre(self): # Busca por nombre al apretar la lupa
         global tree
         nombre_buscador = self.entry_buscar.get().lower()
-
-        if self.entry_buscar.get().lower() == ' ' or self.entry_buscar.get().lower() == '':
+        if self.entry_buscar.get() == ' ':
             print("Se escribio un caracter, no un producto")
+            messagebox.showwarning("Ups!", "Ingresa un nombre valido.")
+            self.entry_buscar.delete(0, "end")
+            self.entry_buscar.insert(0, '')
             self.mostrar_datos()
+        elif nombre_buscador == 'buscador':
+            print("Se escribio el placeholder, no un producto")
+            self.mostrar_datos()
+        # elif not nombre_buscador.isalpha():
+        #     print("Se escribio un numero, no un producto")
+        #     messagebox.showwarning("Ups!", "Ingresa un nombre valido.")
+        #     self.entry_buscar.delete(0, "end")
+        #     self.entry_buscar.insert(0, '')
+        #     self.mostrar_datos()
         else:
+            print(f"Se escribio un producto: '{nombre_buscador}'")
             datos = self.modelo_stock.buscar_nombre(nombre_buscador)
-
-        for item in self.treeview.get_children():
-            self.treeview.delete(item)
-            
-        for dato in datos:
-            self.treeview.insert("", "end", values=dato)
+            for item in self.treeview.get_children():
+                self.treeview.delete(item)
+                
+            for dato in datos:
+                self.treeview.insert("", "end", values=dato)
