@@ -124,29 +124,38 @@ class VistaPrincipal:
         if self.entry_buscar.get() == '':
             self.entry_buscar.insert(0, 'Buscador')
 
-    def buscar_nombre(self): # Busca por nombre al apretar la lupa
+    def buscar_nombre(self):
+        # Busca por nombre al apretar la lupa
         global tree
         nombre_buscador = self.entry_buscar.get().lower()
-        if self.entry_buscar.get() == ' ':
-            print("Se escribio un caracter, no un producto")
-            messagebox.showwarning("Ups!", "Ingresa un nombre valido.")
+        palabras = nombre_buscador.split()
+
+        # Verifica que la entrada del usuario no sea vacía
+        if not palabras:
+            messagebox.showwarning("Ups!", "El campo está vacio.")
             self.entry_buscar.delete(0, "end")
             self.entry_buscar.insert(0, '')
             self.mostrar_datos()
-        elif nombre_buscador == 'buscador':
-            print("Se escribio el placeholder, no un producto")
+            return
+        # Verifica que la entrada del usuario no sea el placeholder
+        if palabras[0] == "buscador":
+            messagebox.showwarning("Ups!", "Se ingresó el placeholder.")
+            self.entry_buscar.delete(0, "end")
+            self.entry_buscar.insert(0, '')
             self.mostrar_datos()
-        # elif not nombre_buscador.isalpha():
-        #     print("Se escribio un numero, no un producto")
-        #     messagebox.showwarning("Ups!", "Ingresa un nombre valido.")
-        #     self.entry_buscar.delete(0, "end")
-        #     self.entry_buscar.insert(0, '')
-        #     self.mostrar_datos()
-        else:
-            print(f"Se escribio un producto: '{nombre_buscador}'")
-            datos = self.modelo_stock.buscar_nombre(nombre_buscador)
-            for item in self.treeview.get_children():
-                self.treeview.delete(item)
-                
-            for dato in datos:
-                self.treeview.insert("", "end", values=dato)
+            return
+        # Verifica que cada palabra sea alfabética
+        for palabra in palabras:
+            if not palabra.isalpha():
+                messagebox.showwarning("Ups!", "No es alfabetico.")
+                self.entry_buscar.delete(0, "end")
+                self.entry_buscar.insert(0, '')
+                self.mostrar_datos()
+                return
+        # Si todo está bien, realiza la búsqueda
+        print(f"Se escribio un producto: '{nombre_buscador}'")
+        datos = self.modelo_stock.buscar_nombre(nombre_buscador)
+        for item in self.treeview.get_children():
+            self.treeview.delete(item)
+        for dato in datos:
+            self.treeview.insert("", "end", values=dato)
