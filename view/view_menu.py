@@ -129,19 +129,18 @@ class VistaPrincipal:
         global tree
         nombre_buscador = self.entry_buscar.get().lower()
         palabras = nombre_buscador.split()
-
         # Verifica que la entrada del usuario no sea vacía
         if not palabras:
             messagebox.showwarning("Ups!", "El campo está vacio.")
             self.entry_buscar.delete(0, "end")
-            self.entry_buscar.insert(0, '')
+            self.entry_buscar.insert(0, 'Buscador')
             self.mostrar_datos()
             return
         # Verifica que la entrada del usuario no sea el placeholder
         if palabras[0] == "buscador":
             messagebox.showwarning("Ups!", "Se ingresó el placeholder.")
             self.entry_buscar.delete(0, "end")
-            self.entry_buscar.insert(0, '')
+            self.entry_buscar.insert(0, 'Buscador')
             self.mostrar_datos()
             return
         # Verifica que cada palabra sea alfabética
@@ -149,7 +148,7 @@ class VistaPrincipal:
             if not palabra.isalpha():
                 messagebox.showwarning("Ups!", "No es alfabetico.")
                 self.entry_buscar.delete(0, "end")
-                self.entry_buscar.insert(0, '')
+                self.entry_buscar.insert(0, 'Buscador')
                 self.mostrar_datos()
                 return
         # Si todo está bien, realiza la búsqueda
@@ -159,3 +158,9 @@ class VistaPrincipal:
             self.treeview.delete(item)
         for dato in datos:
             self.treeview.insert("", "end", values=dato)
+        else:
+            print(f"El producto '{nombre_buscador}' no existe")
+            self.entry_buscar.delete(0, "end")
+            self.entry_buscar.insert(0, 'Buscador')
+            self.mostrar_datos()
+            messagebox.showwarning("Ups!", "Ese producto no existe.")
