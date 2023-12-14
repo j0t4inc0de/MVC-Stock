@@ -5,6 +5,8 @@ from tkinter import ttk, Label, Button
 from tkinter import messagebox
 from ttkthemes import ThemedTk
 from PIL import Image, ImageTk
+import xlsxwriter
+import os
 
 class VistaPrincipal:
     def __init__(self, modelo_stock):
@@ -72,6 +74,13 @@ class VistaPrincipal:
         self.imagen_editar.resize((30, 30))
         self.imagen_editar = ImageTk.PhotoImage(self.imagen_editar)
         self.label_editar = ttk.Button(self.ventanaPrincipal, image=self.imagen_editar, command=self.abrir_vista_editar).place(x=570,y=2)
+
+        # Excel.
+        self.imagen_imprimir = Image.open("view/images/excel512px.png")
+        self.imagen_imprimir.thumbnail((30, 30))
+        self.imagen_imprimir.resize((30, 30))
+        self.imagen_imprimir = ImageTk.PhotoImage(self.imagen_imprimir)
+        self.label_imprimir = ttk.Button(self.ventanaPrincipal, image=self.imagen_imprimir, command=self.Excel_Datos).place(x=700,y=2)        
 
     def mostrar_datos(self):
         # Llamada a la función obtener_datos del modelo_stock
@@ -165,4 +174,50 @@ class VistaPrincipal:
             self.treeview.delete(item)
         for dato in datos:
             self.treeview.insert("", "end", values=dato)
-            
+    
+    def Excel_Datos(self):
+        datos = self.modelo_stock.obtener_datos()
+        data=[]
+        for dato in datos:
+            data.append(dato)
+        tabla=data
+        nombres=[]
+        precios=[]
+        cantidad=[]
+        estados=[]
+        categoria=[]
+        for i in range(len(tabla)):
+            a,b,c,d,e=tabla[i]
+            nombres.append(a)
+            precios.append(b)
+            cantidad.append(c)
+            estados.append(d)
+            categoria.append(e)
+        workbook = xlsxwriter.Workbook('Productos.xlsx')
+        worksheet = workbook.add_worksheet()
+        
+
+        worksheet.write('A1', 'Nombre')
+        worksheet.write('B1', 'Precio')
+        worksheet.write('C1', 'Cantidad')
+        worksheet.write('D1', 'Estado')
+        worksheet.write('E1', 'Categoria')
+        for i in range(len(nombres)):
+            cell=str(i+2)
+
+            nombre_dato=str(nombres[i])
+            worksheet.write('A'+cell,nombre_dato)
+
+            precio_dato=str(precios[i])  
+            worksheet.write('B'+cell,precio_dato)
+
+            cantidad_dato=cantidad[i]
+            worksheet.write('C'+cell,cantidad_dato)
+
+            estado_dato=estados[i]
+            worksheet.write('D'+cell,estado_dato)
+
+            categoria_dato=categoria[i]
+            worksheet.write('E'+cell,categoria_dato)
+        workbook.close()
+        os.system("start EXCEL.EXE Productos.xlsx")        
