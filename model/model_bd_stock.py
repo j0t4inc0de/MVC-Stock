@@ -45,12 +45,12 @@ class ModeloStock:
         return self.cursor.fetchall()
 
     def buscar_nombre(self, nombre_buscador): # Busca el nombre en la base de datos
-        self.cursor.execute("""
+        self.cursor.execute(f"""
             SELECT Producto.nombre, Producto.precio, Existencia.cantidad, Estado.nombre, Categoria.nombre
             FROM Producto
             JOIN Existencia ON Producto.nombre = Existencia.nombre
             JOIN Estado ON Producto.id_estado = Estado.id_estado
-            JOIN Categoria ON Producto.id_categoria = Categoria.id_categoria WHERE Producto.nombre =?""", (nombre_buscador,)
+            JOIN Categoria ON Producto.id_categoria = Categoria.id_categoria WHERE Producto.nombre like '{nombre_buscador}%' """
             )
         resultado = self.cursor.fetchall() 
         return resultado  
