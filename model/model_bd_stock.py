@@ -45,6 +45,7 @@ class ModeloStock:
         return self.cursor.fetchall()
 
     def buscar_nombre(self, nombre_buscador): # Busca el nombre en la base de datos
+        nombre_buscador = nombre_buscador.strip()
         self.cursor.execute(f"""
             SELECT Producto.nombre, Producto.precio, Existencia.cantidad, Estado.nombre, Categoria.nombre
             FROM Producto
