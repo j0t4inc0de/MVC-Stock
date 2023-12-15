@@ -47,6 +47,7 @@ class VistaPrincipal:
         self.imagen_buscar.resize((30, 30))
         self.imagen_buscar = ImageTk.PhotoImage(self.imagen_buscar)
         self.label_buscar = ttk.Button(self.ventanaPrincipal, image=self.imagen_buscar, command=self.buscar_nombre).place(x=295,y=2)
+
         # Actualizar
         self.imagen_actualizar = Image.open("view/images/actualizar-512px.png")
         self.imagen_actualizar.thumbnail((30, 30))
@@ -196,12 +197,12 @@ class VistaPrincipal:
         workbook = xlsxwriter.Workbook('Productos.xlsx')
         worksheet = workbook.add_worksheet()
         
-
         worksheet.write('A1', 'Nombre')
         worksheet.write('B1', 'Precio')
         worksheet.write('C1', 'Cantidad')
         worksheet.write('D1', 'Estado')
         worksheet.write('E1', 'Categoria')
+
         for i in range(len(nombres)):
             cell=str(i+2)
 
@@ -219,5 +220,6 @@ class VistaPrincipal:
 
             categoria_dato=categoria[i]
             worksheet.write('E'+cell,categoria_dato)
+            
         workbook.close()
         os.system("start EXCEL.EXE Productos.xlsx")        
