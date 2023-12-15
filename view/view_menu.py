@@ -142,14 +142,14 @@ class VistaPrincipal:
         datos = self.modelo_stock.buscar_nombre(nombre_buscador)
         # Verifica que la entrada del usuario no sea vacía
         if not palabras:
-            messagebox.showwarning("Ups!", "El campo está vacio.")
+            messagebox.showwarning("Ups!", "No ingresaste nada.")
             self.entry_buscar.delete(0, "end")
             self.entry_buscar.insert(0, 'Buscador')
             self.mostrar_datos()
             return
         # Verifica que la entrada del usuario no sea el placeholder
         if palabras[0] == "buscador":
-            messagebox.showwarning("Ups!", "Se ingresó el placeholder.")
+            messagebox.showwarning("Ups!", "No ingresaste nada.")
             self.entry_buscar.delete(0, "end")
             self.entry_buscar.insert(0, 'Buscador')
             self.mostrar_datos()
@@ -163,7 +163,7 @@ class VistaPrincipal:
         # Verifica que cada palabra sea alfabética
         for palabra in palabras:
             if not palabra.isalpha():
-                messagebox.showwarning("Ups!", "No es alfabetico.")
+                messagebox.showwarning("Ups!", "Ingresa un nombre valido.")
                 self.entry_buscar.delete(0, "end")
                 self.entry_buscar.insert(0, 'Buscador')
                 self.mostrar_datos()
