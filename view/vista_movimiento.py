@@ -81,7 +81,15 @@ class VistaMovimiento:
         fecha_movimiento = self.entry_fecha_movimiento.get()
         cantidad_movimientos = int(self.entry_cantidad_movimientos.get())
 
-        self.modelo_stock.add_movimiento(tipo_movimiento_id, existencia_id, descripcion_movimiento, fecha_movimiento, cantidad_movimientos)
+        # Si el tipo de movimiento es "entrada", sumamos
+
+        if selected_tipo_movimiento == "entrada":
+            self.modelo_stock.add_movimiento(tipo_movimiento_id, existencia_id, descripcion_movimiento, fecha_movimiento, cantidad_movimientos)
+
+        # Si el tipo de movimiento es "salida", restamos
+
+        else:
+            self.modelo_stock.add_movimiento(tipo_movimiento_id, existencia_id, descripcion_movimiento, fecha_movimiento, -cantidad_movimientos)
 
         self.tipo_movimiento_combobox.set("")
         self.existencia_combobox.set("")
