@@ -4,6 +4,7 @@
     # pip install ttkthemes
     # pip install pillow
     # pip install packaging
+    # pip install xlsxwriter
 import sqlite3
 from PIL import Image, ImageTk
 from ttkthemes import ThemedTk
