@@ -28,7 +28,7 @@ class VistaMovimiento:
         self.existencia_combobox.grid(row=2, column=1, padx=10, pady=10)
         self.populate_existencia_combobox()
 
-        ttk.Label(self.ventanaMovimiento, text="Cantidad:").grid(row=3, column=0, padx=10, pady=10)
+        ttk.Label(self.ventanaMovimiento, text="Cantidad Actual:").grid(row=3, column=0, padx=10, pady=10)
         self.entry_cantidad_existencia = ttk.Entry(self.ventanaMovimiento)
         self.entry_cantidad_existencia.grid(row=3, column=1, padx=10, pady=10 )
 
@@ -82,12 +82,10 @@ class VistaMovimiento:
         cantidad_movimientos = int(self.entry_cantidad_movimientos.get())
 
         # Si el tipo de movimiento es "entrada", sumamos
-
         if selected_tipo_movimiento == "entrada":
             self.modelo_stock.add_movimiento(tipo_movimiento_id, existencia_id, descripcion_movimiento, fecha_movimiento, cantidad_movimientos)
 
         # Si el tipo de movimiento es "salida", restamos
-
         else:
             self.modelo_stock.add_movimiento(tipo_movimiento_id, existencia_id, descripcion_movimiento, fecha_movimiento, -cantidad_movimientos)
 
