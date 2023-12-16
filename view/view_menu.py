@@ -39,8 +39,7 @@ class VistaPrincipal:
         self.treeview.place(x=0, y=50)
 
         self.mostrar_datos()
-        self.aviso_stock()
-        self.ventanaPrincipal.after(420000, self.aviso_stock) # Da tiempo para que se genere el aviso denuevo desspues de avierto 7 MINUTOS 420000
+       
       
        
         # Botones
@@ -61,7 +60,6 @@ class VistaPrincipal:
         self.entry_buscar.bind('<FocusOut>', self.on_focusout)
         self.imagen_buscar = Image.open("view/images/buscar-512px.png")
         self.imagen_buscar.thumbnail((30, 30))
-
         self.imagen_buscar = ImageTk.PhotoImage(self.imagen_buscar)
         self.label_buscar = ttk.Button(self.ventanaPrincipal, image=self.imagen_buscar, command=self.buscar_nombre)
         self.label_buscar.place(x=295,y=2)
@@ -111,7 +109,9 @@ class VistaPrincipal:
         self.label_imprimir.place(x=690,y=2)
         CustomHovertip(self.label_imprimir, text="Imprimir Excel", hover_delay=50)#Asina lo que se quiera mostrar al pasar el cursor por encima del boton
         
-       
+    
+        self.ventanaPrincipal.after(500, self.aviso_stock) # Da tiempo para que se genere el aviso denuevo desspues de avierto 7 MINUTOS 420000
+        self.ventanaPrincipal.after(420000, self.aviso_stock) # Da tiempo para que se genere el aviso denuevo desspues de avierto 7 MINUTOS 420000
            
         
     def mostrar_datos(self):
@@ -263,5 +263,6 @@ class VistaPrincipal:
             nombre, precio, cantidad, estado, categoria = dato
             if cantidad <= stock_bajo:
                 messagebox.showwarning("Stock bajo", f"El producto '{nombre}' tiene un stock bajo ({cantidad}).")
+                return
                 
 
