@@ -18,7 +18,7 @@ class CustomHovertip(Hovertip):
             font=("Arial", 10)
         )
         label.pack()
-        
+# Inicializa la ventana principal.        
 class VistaPrincipal:
     def __init__(self, modelo_stock):
         self.ventanaPrincipal = ThemedTk(theme="arc")
@@ -39,8 +39,6 @@ class VistaPrincipal:
         self.treeview.place(x=0, y=50)
 
         self.mostrar_datos()
-       
-      
        
         # Botones
         # Movimientos
@@ -113,56 +111,68 @@ class VistaPrincipal:
         self.ventanaPrincipal.after(500, self.aviso_stock) # Da tiempo para que se genere el aviso denuevo desspues de avierto 7 MINUTOS 420000
         self.ventanaPrincipal.after(420000, self.aviso_stock) # Da tiempo para que se genere el aviso denuevo desspues de avierto 7 MINUTOS 420000
            
-        
+    # Función `mostrar_datos()`: Muestra los datos de la base de datos en la tabla.
     def mostrar_datos(self):
-        # Llamada a la función obtener_datos del modelo_stock
+        # Obtiene los datos de la base de datos.
         datos = self.modelo_stock.obtener_datos()
-
+        # Elimina todos los elementos de la tabla.
         for item in self.treeview.get_children():
             self.treeview.delete(item)
-            
+        # Agrega los datos a la tabla.
         for dato in datos:
             self.treeview.insert("", "end", values=dato)
 
-    # Abre la vista       
+    # Función `abrir_vista_producto()`:       
     def abrir_vista_producto(self):
         from view.vista_producto import VistaProducto
+        # Crea un objeto de la clase `VistaProducto`.
         vista_producto = VistaProducto(self,self.modelo_stock)  
+        # Muestra la ventana de `VistaProducto`.
         vista_producto.ventanaProducto.grab_set()
         vista_producto.ventanaProducto.wait_window(vista_producto.ventanaProducto)
         
-    # Abre la vista menu movimiento
+    # Función `abrir_vista_movimiento()`:
     def abrir_vista_movimiento(self):
+        # Cierra la ventana actual.
         self.ventanaPrincipal.destroy()
         from view.vista_movimiento_menu import VistaMenuMov
+        # Crea un objeto de la clase `VistaMenuMov`.
         vista_movimiento = VistaMenuMov(self, self.modelo_stock)
         vista_movimiento.ventanaMenuMov.grab_set()
         vista_movimiento.ventanaMenuMov.wait_window(vista_movimiento.ventanaMenuMov)
 
-    # Abre la vista delete
+    # Función `abrir_vista_del()`:
     def abrir_vista_del(self):
         from view.vista_eliminar import VistaEliminar
+        # Crea un objeto de la clase `VistaEliminar`.
         vista_del = VistaEliminar(self, self.modelo_stock)
+        # Muestra la ventana de `VistaEliminar`.
         vista_del.ventanaDel.grab_set()
         vista_del.ventanaDel.wait_window(vista_del.ventanaDel)
         
-    # Abre la vista editar    
+    # Función `abrir_vista_editar()`: 
     def abrir_vista_editar(self):
         from view.vista_editar import VistaEditar
+        # Crea un objeto de la clase `VistaEditar`.
         vista_editar = VistaEditar(self, self.modelo_stock)
+        # Muestra la ventana de `VistaEditar`.
         vista_editar.ventanaED.grab_set()
         vista_editar.ventanaED.wait_window(vista_editar.ventanaED)
-        
+    # Inicia el bucle principal de la ventana.
     def ejecutar(self):
         self.ventanaPrincipal.mainloop()
-
+    # Maneja el evento de clic en el cuadro de búsqueda.
     def on_entry_click(self, event):
+        # Verifica si el texto del cuadro de búsqueda es el placeholder "Buscador".
         if self.entry_buscar.get() == 'Buscador':
+            # Borra el texto del placeholder.
             self.entry_buscar.delete(0, "end")
             self.entry_buscar.insert(0, '')
-
+    # Maneja el evento de pérdida de foco del cuadro de búsqueda.
     def on_focusout(self, event):
+        # Verifica si el texto del cuadro de búsqueda está vacío.
         if self.entry_buscar.get() == '':
+            # Reemplaza el texto vacío con el placeholder "Buscador".
             self.entry_buscar.insert(0, 'Buscador')
 
     def buscar_nombre(self):
@@ -208,16 +218,21 @@ class VistaPrincipal:
             self.treeview.insert("", "end", values=dato)
     
     def Excel_Datos(self):
+        # Obtiene todos los datos del modelo de stock utilizando el método `obtener_datos()`.
         datos = self.modelo_stock.obtener_datos()
+        # Crea una lista vacía para almacenar los datos a exportar.
         data=[]
+        # Itera sobre la lista de datos del modelo de stock y agrega cada dato a la lista `data`.
         for dato in datos:
             data.append(dato)
+        # Crea una lista vacía para cada columna del archivo de Excel.
         tabla=data
         nombres=[]
         precios=[]
         cantidad=[]
         estados=[]
         categoria=[]
+        # Itera sobre la lista `data` y separa cada elemento en sus componentes individuales (nombre, precio, cantidad, estado y categoría) y los agrega a las listas correspondientes.
         for i in range(len(tabla)):
             a,b,c,d,e=tabla[i]
             nombres.append(a)
@@ -225,44 +240,43 @@ class VistaPrincipal:
             cantidad.append(c)
             estados.append(d)
             categoria.append(e)
+        # Crea un objeto de libro de trabajo de Excel con el nombre "Productos.xlsx".
         workbook = xlsxwriter.Workbook('Productos.xlsx')
+        # Crea una hoja de trabajo dentro del libro de trabajo.
         worksheet = workbook.add_worksheet()
-        
+        # Escribe los encabezados de las columnas (`Nombre`, `Precio`, `Cantidad`, `Estado` y `Categoría`) en la primera fila de la hoja de trabajo.
         worksheet.write('A1', 'Nombre')
         worksheet.write('B1', 'Precio')
         worksheet.write('C1', 'Cantidad')
         worksheet.write('D1', 'Estado')
         worksheet.write('E1', 'Categoria')
-
+        # Itera sobre las listas de datos de cada columna y escribe cada elemento en la fila correspondiente de la hoja de trabajo.
         for i in range(len(nombres)):
-            cell=str(i+2)
-
+            cell=str(i+2) # Crea la celda a partir del índice + 2 (para evitar la fila de encabezados)
             nombre_dato=str(nombres[i])
-            worksheet.write('A'+cell,nombre_dato)
-
+            worksheet.write('A'+cell,nombre_dato) # Escribe el nombre del producto en la celda correspondiente
             precio_dato=str(precios[i])  
             worksheet.write('B'+cell,precio_dato)
-
             cantidad_dato=cantidad[i]
             worksheet.write('C'+cell,cantidad_dato)
-
             estado_dato=estados[i]
             worksheet.write('D'+cell,estado_dato)
-
             categoria_dato=categoria[i]
             worksheet.write('E'+cell,categoria_dato)
-            
+        # Cierra el libro de trabajo.
         workbook.close()
         os.system("start EXCEL.EXE Productos.xlsx")
-        
-    def aviso_stock(self):#generacion de funcion para ver el stock bajo
+    # Función `aviso_stock()`: Muestra un aviso cuando el stock de un producto es bajo.
+    def aviso_stock(self):
+        # Obtiene los datos de la base de datos.
         datos = self.modelo_stock.obtener_datos()
+        # Stock bajo.
         stock_bajo = 10
-        
+        # Itera sobre los datos.
         for dato in datos:
             nombre, precio, cantidad, estado, categoria = dato
+            # Verifica si la cantidad es menor o igual al stock bajo.
             if cantidad <= stock_bajo:
+                # Muestra un mensaje de advertencia.
                 messagebox.showwarning("Stock bajo", f"El producto '{nombre}' tiene un stock bajo ({cantidad}).")
                 return
-                
-
