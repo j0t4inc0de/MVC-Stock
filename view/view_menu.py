@@ -14,8 +14,8 @@ class CustomHovertip(Hovertip):
     def showcontents(self):
         label = tk.Label(
             self.tipwindow, text=f' "{self.text}" ', justify=tk.LEFT,
-            bg="#151515", fg="#ffffff", relief=tk.SOLID, borderwidth=1,
-            font=("Times New Roman", 12)
+            bg="#c2c2c2", fg="#000000", relief=tk.SOLID, borderwidth=1,
+            font=("Arial", 10)
         )
         label.pack()
         
