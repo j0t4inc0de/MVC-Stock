@@ -6,7 +6,7 @@ from PIL import Image, ImageTk
 from idlelib.tooltip import Hovertip
 
 
-
+# Funcion para visualizar un mensaje al pasar cursor por encima de un boton
 class CustomHovertip(Hovertip):
     def showcontents(self):
         label = tk.Label(
@@ -42,21 +42,22 @@ class VistaMenuMov:
         self.imagen_volver = ImageTk.PhotoImage(self.imagen_volver)
         self.label_volver = ttk.Button(self.ventanaMenuMov, image=self.imagen_volver, command=self.abrir_vista_principal)
         self.label_volver.place(x=2, y=2)
-        CustomHovertip(self.label_volver, text="Atras", hover_delay=50)
+        CustomHovertip(self.label_volver, text="Atras", hover_delay=50)#Asina lo que se quiera mostrar al pasar el cursor por encima del boton
         # Boton imagen actualizar
         self.imagen_actualizar = Image.open("view/images/actualizar-512px.png")
         self.imagen_actualizar.thumbnail((30, 30))
         self.imagen_actualizar = ImageTk.PhotoImage(self.imagen_actualizar)
         self.label_actualizar = ttk.Button(self.ventanaMenuMov, image=self.imagen_actualizar, command=self.mostrar_datos_mov)
         self.label_actualizar.place(x=80,y=2)
-        CustomHovertip(self.label_actualizar, text="Actualizar", hover_delay=50)
+        CustomHovertip(self.label_actualizar, text="Actualizar", hover_delay=50)#Asina lo que se quiera mostrar al pasar el cursor por encima del boton
         # Boton imagen añadir
         self.imagen_anadir = Image.open("view/images/añadir-512px.png")
         self.imagen_anadir.thumbnail((30, 30))
         self.imagen_anadir = ImageTk.PhotoImage(self.imagen_anadir)
         self.label_anadir = ttk.Button(self.ventanaMenuMov, image=self.imagen_anadir, command=self.abrir_vista_movimiento)
         self.label_anadir.place(x=155,y=2)
-        CustomHovertip(self.label_anadir, text="Añadir", hover_delay=50)
+        CustomHovertip(self.label_anadir, text="Añadir", hover_delay=50)#Asina lo que se quiera mostrar al pasar el cursor por encima del boton
+        
 
         self.mostrar_datos_mov()
 
@@ -74,7 +75,8 @@ class VistaMenuMov:
         vista_movimiento = VistaMovimiento(self, self.modelo_stock)
         vista_movimiento.ventanaMovimiento.wait_window(vista_movimiento.ventanaMovimiento)
         self.ventanaMenuMov.mainloop()
-        
+    
+    #vuelve a abrir la ventana principal y desruye la ventana de movimientos
     def abrir_vista_principal(self):
         self.ventanaMenuMov.destroy()
         from view.view_menu import VistaPrincipal

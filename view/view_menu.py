@@ -9,6 +9,7 @@ import xlsxwriter
 import os
 from idlelib.tooltip import Hovertip
 
+# Funcion para visualizar un mensaje al pasar cursor por encima de un boton
 class CustomHovertip(Hovertip):
     def showcontents(self):
         label = tk.Label(
@@ -68,7 +69,7 @@ class VistaPrincipal:
         self.imagen_actualizar = ImageTk.PhotoImage(self.imagen_actualizar)
         self.label_actualizar = ttk.Button(self.ventanaPrincipal, image=self.imagen_actualizar, command=self.mostrar_datos)
         self.label_actualizar.place(x=360,y=2)
-        CustomHovertip(self.label_actualizar, text="Actualizar", hover_delay=50)
+        CustomHovertip(self.label_actualizar, text="Actualizar", hover_delay=50)#Asina lo que se quiera mostrar al pasar el cursor por encima del boton
         
         # Añadir.
         self.imagen_anadir = Image.open("view/images/añadir-512px.png")
@@ -76,7 +77,7 @@ class VistaPrincipal:
         self.imagen_anadir = ImageTk.PhotoImage(self.imagen_anadir)
         self.label_anadir = ttk.Button(self.ventanaPrincipal, image=self.imagen_anadir, command=self.abrir_vista_producto)
         self.label_anadir.place(x=450,y=2)
-        CustomHovertip(self.label_anadir, text="Añadir", hover_delay=50)
+        CustomHovertip(self.label_anadir, text="Añadir", hover_delay=50)#Asina lo que se quiera mostrar al pasar el cursor por encima del boton
 
         #Eliminar
         self.imagen_eliminar = Image.open("view/images/eliminar-512px.png")
@@ -94,7 +95,7 @@ class VistaPrincipal:
         self.imagen_editar = ImageTk.PhotoImage(self.imagen_editar)
         self.label_editar = ttk.Button(self.ventanaPrincipal, image=self.imagen_editar, command=self.abrir_vista_editar)
         self.label_editar.place(x=570,y=2)
-        CustomHovertip(self.label_editar, text="Editar", hover_delay=50)
+        CustomHovertip(self.label_editar, text="Editar", hover_delay=50)#Asina lo que se quiera mostrar al pasar el cursor por encima del boton
         
 
         # Excel.
@@ -103,7 +104,7 @@ class VistaPrincipal:
         self.imagen_imprimir = ImageTk.PhotoImage(self.imagen_imprimir)
         self.label_imprimir = ttk.Button(self.ventanaPrincipal, image=self.imagen_imprimir, command=self.Excel_Datos)
         self.label_imprimir.place(x=690,y=2)
-        CustomHovertip(self.label_imprimir, text="Imprimir Excel", hover_delay=50)
+        CustomHovertip(self.label_imprimir, text="Imprimir Excel", hover_delay=50)#Asina lo que se quiera mostrar al pasar el cursor por encima del boton
         
         # Aviso de stock bajo
         self.aviso_stock()
@@ -251,7 +252,7 @@ class VistaPrincipal:
         workbook.close()
         os.system("start EXCEL.EXE Productos.xlsx")
         
-    def aviso_stock(self):
+    def aviso_stock(self):#generacion de funcion para ver el stock bajo
         datos = self.modelo_stock.obtener_datos()
         stock_bajo = 10
         
