@@ -29,7 +29,7 @@ class VistaPrincipal:
 
         self.mostrar_datos()
         self.aviso_stock()
-        self.ventanaPrincipal.after(6000000, self.aviso_stock)# da tiempo para que se genere el aviso denuevo desspues de avierto
+        self.ventanaPrincipal.after(420000, self.aviso_stock) # Da tiempo para que se genere el aviso denuevo desspues de avierto 7 MINUTOS 420000
        
         # Botones
         # Movimientos
@@ -87,8 +87,6 @@ class VistaPrincipal:
         self.imagen_imprimir = ImageTk.PhotoImage(self.imagen_imprimir)
         self.label_imprimir = ttk.Button(self.ventanaPrincipal, image=self.imagen_imprimir, command=self.Excel_Datos).place(x=700,y=2)     
         
-    
-
     def mostrar_datos(self):
         # Llamada a la función obtener_datos del modelo_stock
         datos = self.modelo_stock.obtener_datos()
