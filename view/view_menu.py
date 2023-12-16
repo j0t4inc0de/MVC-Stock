@@ -39,6 +39,8 @@ class VistaPrincipal:
         self.treeview.place(x=0, y=50)
 
         self.mostrar_datos()
+        self.aviso_stock()
+        self.ventanaPrincipal.after(420000, self.aviso_stock) # Da tiempo para que se genere el aviso denuevo desspues de avierto 7 MINUTOS 420000
       
        
         # Botones
