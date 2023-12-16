@@ -3,7 +3,22 @@ from tkinter import PhotoImage, ttk, Label, Button
 from tkinter import Button
 from ttkthemes import ThemedTk
 from PIL import Image, ImageTk
+from idlelib.tooltip import Hovertip
+
+
+
+class CustomHovertip(Hovertip):
+    def showcontents(self):
+        label = tk.Label(
+            self.tipwindow, text=f' "{self.text}" ', justify=tk.LEFT,
+            bg="#151515", fg="#ffffff", relief=tk.SOLID, borderwidth=1,
+            font=("Times New Roman", 12)
+        )
+        label.pack()
+        
+        
 ruta = "view/images/anadir.gif"
+
 class VistaMenuMov:
     def __init__(self, ventanaPrincipal, modelo_stock):
         self.ventanaMenuMov = ThemedTk(theme="arc")
@@ -24,21 +39,24 @@ class VistaMenuMov:
         # Boton imagen volver
         self.imagen_volver = Image.open("view/images/regresar1.png")
         self.imagen_volver.thumbnail((30, 30))
-        self.imagen_volver.resize((30, 30))
         self.imagen_volver = ImageTk.PhotoImage(self.imagen_volver)
-        self.label_anadir = ttk.Button(self.ventanaMenuMov, image=self.imagen_volver).place(x=2,y=2)
+        self.label_volver = ttk.Button(self.ventanaMenuMov, image=self.imagen_volver, command=self.abrir_vista_principal)
+        self.label_volver.place(x=2, y=2)
+        CustomHovertip(self.label_volver, text="Atras", hover_delay=50)
         # Boton imagen actualizar
         self.imagen_actualizar = Image.open("view/images/actualizar-512px.png")
         self.imagen_actualizar.thumbnail((30, 30))
-        self.imagen_actualizar.resize((30, 30))
         self.imagen_actualizar = ImageTk.PhotoImage(self.imagen_actualizar)
-        self.label_actualizar = ttk.Button(self.ventanaMenuMov, image=self.imagen_actualizar, command=self.mostrar_datos_mov).place(x=80,y=2)
+        self.label_actualizar = ttk.Button(self.ventanaMenuMov, image=self.imagen_actualizar, command=self.mostrar_datos_mov)
+        self.label_actualizar.place(x=80,y=2)
+        CustomHovertip(self.label_actualizar, text="Actualizar", hover_delay=50)
         # Boton imagen añadir
         self.imagen_anadir = Image.open("view/images/añadir-512px.png")
         self.imagen_anadir.thumbnail((30, 30))
-        self.imagen_anadir.resize((30, 30))
         self.imagen_anadir = ImageTk.PhotoImage(self.imagen_anadir)
-        self.label_anadir = ttk.Button(self.ventanaMenuMov, image=self.imagen_anadir, command=self.abrir_vista_movimiento).place(x=155,y=2)
+        self.label_anadir = ttk.Button(self.ventanaMenuMov, image=self.imagen_anadir, command=self.abrir_vista_movimiento)
+        self.label_anadir.place(x=155,y=2)
+        CustomHovertip(self.label_anadir, text="Añadir", hover_delay=50)
 
         self.mostrar_datos_mov()
 
@@ -55,5 +73,13 @@ class VistaMenuMov:
         from view.vista_movimiento import VistaMovimiento
         vista_movimiento = VistaMovimiento(self, self.modelo_stock)
         vista_movimiento.ventanaMovimiento.wait_window(vista_movimiento.ventanaMovimiento)
-        
         self.ventanaMenuMov.mainloop()
+        
+    def abrir_vista_principal(self):
+        self.ventanaMenuMov.destroy()
+        from view.view_menu import VistaPrincipal
+        vista_principla = VistaPrincipal(self.modelo_stock)
+        vista_principla.ventanaPrincipal.grab_set()
+        vista_principla.ventanaPrincipal.wait_window(vista_principla.ventanaPrincipal)
+        
+ 

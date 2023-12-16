@@ -7,7 +7,17 @@ from ttkthemes import ThemedTk
 from PIL import Image, ImageTk
 import xlsxwriter
 import os
+from idlelib.tooltip import Hovertip
 
+class CustomHovertip(Hovertip):
+    def showcontents(self):
+        label = tk.Label(
+            self.tipwindow, text=f' "{self.text}" ', justify=tk.LEFT,
+            bg="#151515", fg="#ffffff", relief=tk.SOLID, borderwidth=1,
+            font=("Times New Roman", 12)
+        )
+        label.pack()
+        
 class VistaPrincipal:
     def __init__(self, modelo_stock):
         self.ventanaPrincipal = ThemedTk(theme="arc")
@@ -28,16 +38,16 @@ class VistaPrincipal:
         self.treeview.place(x=0, y=50)
 
         self.mostrar_datos()
-        self.aviso_stock()
-        self.ventanaPrincipal.after(420000, self.aviso_stock) # Da tiempo para que se genere el aviso denuevo desspues de avierto 7 MINUTOS 420000
+      
        
         # Botones
         # Movimientos
         self.imagen_mov = Image.open("view/images/movimientos-512px.png")
         self.imagen_mov.thumbnail((30, 30))
-        self.imagen_mov.resize((30, 30))
         self.imagen_mov = ImageTk.PhotoImage(self.imagen_mov)
-        self.label_mov = ttk.Button(self.ventanaPrincipal, image=self.imagen_mov, command=self.abrir_vista_movimiento).place(x=630,y=2)
+        self.label_mov = ttk.Button(self.ventanaPrincipal, image=self.imagen_mov, command=self.abrir_vista_movimiento)
+        self.label_mov.place(x=630,y=2)
+        CustomHovertip(self.label_mov, text="Movimiento", hover_delay=50)
 
         # Buscar
         #Entry del Buscar
@@ -55,37 +65,50 @@ class VistaPrincipal:
         # Actualizar
         self.imagen_actualizar = Image.open("view/images/actualizar-512px.png")
         self.imagen_actualizar.thumbnail((30, 30))
-        self.imagen_actualizar.resize((30, 30))
         self.imagen_actualizar = ImageTk.PhotoImage(self.imagen_actualizar)
-        self.label_actualizar = ttk.Button(self.ventanaPrincipal, image=self.imagen_actualizar, command=self.mostrar_datos).place(x=360,y=2)
+        self.label_actualizar = ttk.Button(self.ventanaPrincipal, image=self.imagen_actualizar, command=self.mostrar_datos)
+        self.label_actualizar.place(x=360,y=2)
+        CustomHovertip(self.label_actualizar, text="Actualizar", hover_delay=50)
         
         # Añadir.
         self.imagen_anadir = Image.open("view/images/añadir-512px.png")
         self.imagen_anadir.thumbnail((30, 30))
-        self.imagen_anadir.resize((30, 30))
         self.imagen_anadir = ImageTk.PhotoImage(self.imagen_anadir)
-        self.label_anadir = ttk.Button(self.ventanaPrincipal, image=self.imagen_anadir, command=self.abrir_vista_producto).place(x=450,y=2)
+        self.label_anadir = ttk.Button(self.ventanaPrincipal, image=self.imagen_anadir, command=self.abrir_vista_producto)
+        self.label_anadir.place(x=450,y=2)
+        CustomHovertip(self.label_anadir, text="Añadir", hover_delay=50)
 
-        # Eliminar.
+        #Eliminar
         self.imagen_eliminar = Image.open("view/images/eliminar-512px.png")
         self.imagen_eliminar.thumbnail((30, 30))
-        self.imagen_eliminar.resize((30, 30))
         self.imagen_eliminar = ImageTk.PhotoImage(self.imagen_eliminar)
-        self.label_eliminar = ttk.Button(self.ventanaPrincipal, image=self.imagen_eliminar, command=self.abrir_vista_del).place(x=510,y=2)
+        # Crear el botón sin colocarlo directamente, para poder asignar el CustomHovertip
+        self.label_eliminar = ttk.Button(self.ventanaPrincipal, image=self.imagen_eliminar, command=self.abrir_vista_del)
+        self.label_eliminar.place(x=510, y=2)
+        # Aplicar el CustomHovertip
+        CustomHovertip(self.label_eliminar, text="Eliminar", hover_delay=50)
 
         # Editar.
         self.imagen_editar = Image.open("view/images/editar-512px.png")
         self.imagen_editar.thumbnail((30, 30))
-        self.imagen_editar.resize((30, 30))
         self.imagen_editar = ImageTk.PhotoImage(self.imagen_editar)
-        self.label_editar = ttk.Button(self.ventanaPrincipal, image=self.imagen_editar, command=self.abrir_vista_editar).place(x=570,y=2)
+        self.label_editar = ttk.Button(self.ventanaPrincipal, image=self.imagen_editar, command=self.abrir_vista_editar)
+        self.label_editar.place(x=570,y=2)
+        CustomHovertip(self.label_editar, text="Editar", hover_delay=50)
+        
 
         # Excel.
         self.imagen_imprimir = Image.open("view/images/excel512px.png")
         self.imagen_imprimir.thumbnail((30, 30))
-        self.imagen_imprimir.resize((30, 30))
         self.imagen_imprimir = ImageTk.PhotoImage(self.imagen_imprimir)
-        self.label_imprimir = ttk.Button(self.ventanaPrincipal, image=self.imagen_imprimir, command=self.Excel_Datos).place(x=690,y=2)     
+        self.label_imprimir = ttk.Button(self.ventanaPrincipal, image=self.imagen_imprimir, command=self.Excel_Datos)
+        self.label_imprimir.place(x=690,y=2)
+        CustomHovertip(self.label_imprimir, text="Imprimir Excel", hover_delay=50)
+        
+        # Aviso de stock bajo
+        self.aviso_stock()
+        self.ventanaPrincipal.after(420000, self.aviso_stock) # Da tiempo para que se genere el aviso denuevo desspues de avierto 7 MINUTOS 420000
+           
         
     def mostrar_datos(self):
         # Llamada a la función obtener_datos del modelo_stock
@@ -236,3 +259,5 @@ class VistaPrincipal:
             nombre, precio, cantidad, estado, categoria = dato
             if cantidad <= stock_bajo:
                 messagebox.showwarning("Stock bajo", f"El producto '{nombre}' tiene un stock bajo ({cantidad}).")
+                
+
