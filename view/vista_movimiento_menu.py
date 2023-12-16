@@ -11,8 +11,8 @@ class CustomHovertip(Hovertip):
     def showcontents(self):
         label = tk.Label(
             self.tipwindow, text=f' "{self.text}" ', justify=tk.LEFT,
-            bg="#151515", fg="#ffffff", relief=tk.SOLID, borderwidth=1,
-            font=("Times New Roman", 12)
+            bg="#c2c2c2", fg="#000000", relief=tk.SOLID, borderwidth=1,
+            font=("Arial", 10)
         )
         label.pack()
         
@@ -42,7 +42,7 @@ class VistaMenuMov:
         self.imagen_volver = ImageTk.PhotoImage(self.imagen_volver)
         self.label_volver = ttk.Button(self.ventanaMenuMov, image=self.imagen_volver, command=self.abrir_vista_principal)
         self.label_volver.place(x=2, y=2)
-        CustomHovertip(self.label_volver, text="Atras", hover_delay=50)#Asina lo que se quiera mostrar al pasar el cursor por encima del boton
+        CustomHovertip(self.label_volver, text="Regresar al menu", hover_delay=50)#Asina lo que se quiera mostrar al pasar el cursor por encima del boton
         # Boton imagen actualizar
         self.imagen_actualizar = Image.open("view/images/actualizar-512px.png")
         self.imagen_actualizar.thumbnail((30, 30))
