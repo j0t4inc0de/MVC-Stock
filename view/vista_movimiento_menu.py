@@ -12,27 +12,33 @@ class VistaMenuMov:
         self.ventanaMenuMov.resizable(width=False, height=False)
         self.modelo_stock = modelo_stock
 
-        self.treeviewMov = ttk.Treeview(self.ventanaMenuMov, columns=("Tipo", "Nombre", "Cantidad actual", "Descripción", "Fecha", "Movimiento"), show="headings", height=16)
+        self.treeviewMov = ttk.Treeview(self.ventanaMenuMov, columns=("Tipo", "Producto", "Cantidad actual", "Descripción", "Fecha", "Movimiento"), show="headings", height=16)
         self.treeviewMov.heading("Tipo", text="Tipo")
-        self.treeviewMov.heading("Nombre", text="Nombre")
+        self.treeviewMov.heading("Producto", text="Producto")
         self.treeviewMov.heading("Cantidad actual", text="Cantidad actual")
         self.treeviewMov.heading("Descripción", text="Descripción")
         self.treeviewMov.heading("Fecha", text="Fecha")
         self.treeviewMov.heading("Movimiento", text="Movimiento")
         self.treeviewMov.place(x=0, y=50)
 
+        # Boton imagen volver
+        self.imagen_volver = Image.open("view/images/regresar1.png")
+        self.imagen_volver.thumbnail((30, 30))
+        self.imagen_volver.resize((30, 30))
+        self.imagen_volver = ImageTk.PhotoImage(self.imagen_volver)
+        self.label_anadir = ttk.Button(self.ventanaMenuMov, image=self.imagen_volver).place(x=2,y=2)
         # Boton imagen actualizar
         self.imagen_actualizar = Image.open("view/images/actualizar-512px.png")
         self.imagen_actualizar.thumbnail((30, 30))
         self.imagen_actualizar.resize((30, 30))
         self.imagen_actualizar = ImageTk.PhotoImage(self.imagen_actualizar)
-        self.label_actualizar = ttk.Button(self.ventanaMenuMov, image=self.imagen_actualizar, command=self.mostrar_datos_mov).place(x=5,y=2)
+        self.label_actualizar = ttk.Button(self.ventanaMenuMov, image=self.imagen_actualizar, command=self.mostrar_datos_mov).place(x=80,y=2)
         # Boton imagen añadir
         self.imagen_anadir = Image.open("view/images/añadir-512px.png")
         self.imagen_anadir.thumbnail((30, 30))
         self.imagen_anadir.resize((30, 30))
         self.imagen_anadir = ImageTk.PhotoImage(self.imagen_anadir)
-        self.label_anadir = ttk.Button(self.ventanaMenuMov, image=self.imagen_anadir, command=self.abrir_vista_movimiento).place(x=80,y=2)
+        self.label_anadir = ttk.Button(self.ventanaMenuMov, image=self.imagen_anadir, command=self.abrir_vista_movimiento).place(x=155,y=2)
 
         self.mostrar_datos_mov()
 

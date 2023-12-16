@@ -18,9 +18,9 @@ class VistaPrincipal:
     
 
         # Treeview es la tabla donde pondremos los datos de la bd
-        self.treeview = ttk.Treeview(self.ventanaPrincipal, columns=("Nombre", "Precio", "Cantidad", "Estado", "Categoría"), show="headings", height=16)
-        self.treeview.heading("Nombre", text="Nombre")
-        self.treeview.column("Nombre", width=280)
+        self.treeview = ttk.Treeview(self.ventanaPrincipal, columns=("Producto", "Precio", "Cantidad", "Estado", "Categoría"), show="headings", height=16)
+        self.treeview.heading("Producto", text="Producto")
+        self.treeview.column("Producto", width=280)
         self.treeview.heading("Precio", text="Precio")
         self.treeview.heading("Cantidad", text="Cantidad")
         self.treeview.heading("Estado", text="Estado")
@@ -85,7 +85,7 @@ class VistaPrincipal:
         self.imagen_imprimir.thumbnail((30, 30))
         self.imagen_imprimir.resize((30, 30))
         self.imagen_imprimir = ImageTk.PhotoImage(self.imagen_imprimir)
-        self.label_imprimir = ttk.Button(self.ventanaPrincipal, image=self.imagen_imprimir, command=self.Excel_Datos).place(x=700,y=2)     
+        self.label_imprimir = ttk.Button(self.ventanaPrincipal, image=self.imagen_imprimir, command=self.Excel_Datos).place(x=690,y=2)     
         
     def mostrar_datos(self):
         # Llamada a la función obtener_datos del modelo_stock
