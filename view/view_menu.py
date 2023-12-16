@@ -15,6 +15,7 @@ class VistaPrincipal:
         self.ventanaPrincipal.geometry("1100x430")
         self.ventanaPrincipal.resizable(width=False, height=False)
         self.modelo_stock = modelo_stock
+    
 
         # Treeview es la tabla donde pondremos los datos de la bd
         self.treeview = ttk.Treeview(self.ventanaPrincipal, columns=("Nombre", "Precio", "Cantidad", "Estado", "Categoría"), show="headings", height=16)
@@ -27,6 +28,9 @@ class VistaPrincipal:
         self.treeview.place(x=0, y=50)
 
         self.mostrar_datos()
+        self.aviso_stock()
+        self.ventanaPrincipal.after(6000000, self.aviso_stock)# da tiempo para que se genere el aviso denuevo desspues de avierto
+       
         # Botones
         # Movimientos
         self.imagen_mov = Image.open("view/images/movimientos-512px.png")
@@ -81,7 +85,9 @@ class VistaPrincipal:
         self.imagen_imprimir.thumbnail((30, 30))
         self.imagen_imprimir.resize((30, 30))
         self.imagen_imprimir = ImageTk.PhotoImage(self.imagen_imprimir)
-        self.label_imprimir = ttk.Button(self.ventanaPrincipal, image=self.imagen_imprimir, command=self.Excel_Datos).place(x=700,y=2)        
+        self.label_imprimir = ttk.Button(self.ventanaPrincipal, image=self.imagen_imprimir, command=self.Excel_Datos).place(x=700,y=2)     
+        
+    
 
     def mostrar_datos(self):
         # Llamada a la función obtener_datos del modelo_stock
@@ -222,4 +228,15 @@ class VistaPrincipal:
             worksheet.write('E'+cell,categoria_dato)
             
         workbook.close()
-        os.system("start EXCEL.EXE Productos.xlsx")        
+        os.system("start EXCEL.EXE Productos.xlsx")
+        
+    def aviso_stock(self):
+        datos = self.modelo_stock.obtener_datos()
+        stock_bajo = 10
+        
+        for dato in datos:
+            nombre, precio, cantidad, estado, categoria = dato
+            if cantidad <= stock_bajo:
+                messagebox.showwarning("Stock bajo", f"El producto '{nombre}' tiene un stock bajo ({cantidad}).")
+
+
