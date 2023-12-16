@@ -61,7 +61,10 @@ class VistaPrincipal:
         self.imagen_buscar.thumbnail((30, 30))
         self.imagen_buscar.resize((30, 30))
         self.imagen_buscar = ImageTk.PhotoImage(self.imagen_buscar)
-        self.label_buscar = ttk.Button(self.ventanaPrincipal, image=self.imagen_buscar, command=self.buscar_nombre).place(x=295,y=2)
+        self.label_buscar = ttk.Button(self.ventanaPrincipal, image=self.imagen_buscar, command=self.buscar_nombre)
+        self.label_buscar.place(x=295,y=2)
+        CustomHovertip(self.label_buscar, text="Buscar", hover_delay=50)
+
 
         # Actualizar
         self.imagen_actualizar = Image.open("view/images/actualizar-512px.png")
