@@ -236,5 +236,3 @@ class VistaPrincipal:
             nombre, precio, cantidad, estado, categoria = dato
             if cantidad <= stock_bajo:
                 messagebox.showwarning("Stock bajo", f"El producto '{nombre}' tiene un stock bajo ({cantidad}).")
-
-
