@@ -136,8 +136,9 @@ class ModeloStock:
         self.conn.commit()
 
     def get_movimiento_data(self):
-        self.cursor.execute("SELECT  id_tipomov, id_existencia, cantidad_existencia, descripcion, fecha_mov, cantidad_mov FROM Movimiento")
+        self.cursor.execute("SELECT id_tipomov, id_existencia, descripcion, fecha_mov, cantidad_mov FROM Movimientos")
         return self.cursor.fetchall()
+
     
     def edit_producto(self, id_existencia, nueva_cantidad, nuevo_precio, nuevo_estado,nueva_categoria):
         # Actualizar la cantidad en la tabla Existencia
@@ -183,5 +184,16 @@ class ModeloStock:
         self.cursor.execute("SELECT nombre FROM Categoria")
         categorias = self.cursor.fetchall()
         return [categoria[0] for categoria in categorias]
+    
+    
+    def get_movimiento_info_by_id(self,id_movimiento):
+        self.cursor.execute("""
+            SELECT id_mov, id_existencia, id_tipomov, cantidad_mov, fecha_mov, descripcion
+            FROM Movimientos
+            WHERE id_mov = ?
+        """, (id_movimiento,))
+        return self.cursor.fetchone()
+
+
     
    

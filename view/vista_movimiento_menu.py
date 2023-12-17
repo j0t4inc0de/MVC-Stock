@@ -58,6 +58,16 @@ class VistaMenuMov:
         self.label_anadir.place(x=155,y=2)
         CustomHovertip(self.label_anadir, text="Añadir", hover_delay=50)#Asina lo que se quiera mostrar al pasar el cursor por encima del boton
         
+         #Eliminar
+        self.imagen_eliminar = Image.open("view/images/eliminar-512px.png")
+        self.imagen_eliminar.thumbnail((30, 30))
+        self.imagen_eliminar = ImageTk.PhotoImage(self.imagen_eliminar)
+        # Crear el botón sin colocarlo directamente, para poder asignar el CustomHovertip
+        self.label_eliminar = ttk.Button(self.ventanaMenuMov, image=self.imagen_eliminar, command=self.abrir_vista_del)
+        self.label_eliminar.place(x=225, y=2)
+        # Aplicar el CustomHovertip
+        CustomHovertip(self.label_eliminar, text="Eliminar", hover_delay=50)
+        
 
         self.mostrar_datos_mov()
 
@@ -84,4 +94,22 @@ class VistaMenuMov:
         vista_principla.ventanaPrincipal.grab_set()
         vista_principla.ventanaPrincipal.wait_window(vista_principla.ventanaPrincipal)
         
- 
+    def abrir_vista_del(self):
+        from view.vista_eliminar_mov import VistaEliminarMovimiento
+
+        # Liberar el evento de grab_set() en la ventana actual
+        self.ventanaMenuMov.grab_release()
+
+        # Crea un objeto de la clase `VistaEliminar`.
+        vista_del = VistaEliminarMovimiento(self, self.modelo_stock)
+        
+        # Muestra la ventana de `VistaEliminar`.
+        vista_del.ventanaDel.grab_set()
+        vista_del.ventanaDel.wait_window(vista_del.ventanaDel)
+        
+        # Después de cerrar la ventana de eliminación, actualiza la vista principal
+        self.mostrar_datos_mov()
+
+
+                
+        
