@@ -38,6 +38,7 @@ class Controlador:
             # Si son incorrectos, muestra un mensaje de error.
             else:
                 print('Acceso denegado')
+                self.vista_login.entry_usuario.delete(0, 'end')
                 self.vista_login.entry_contraseña.delete(0, 'end')
                 mb.showerror('Acceso Denegado', 'Usuario/Contraseña incorrectos.')
     # Abre la vista principal de la aplicación.
