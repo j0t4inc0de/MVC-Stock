@@ -27,7 +27,7 @@ class VistaMenuMov:
         self.ventanaMenuMov.resizable(width=False, height=False)
         self.modelo_stock = modelo_stock
 
-        self.treeviewMov = ttk.Treeview(self.ventanaMenuMov, columns=("Tipo", "Producto", "Cantidad actual", "Descripción", "Fecha", "Movimiento"), show="headings", height=16)
+        self.treeviewMov = ttk.Treeview(self.ventanaMenuMov, columns=("Tipo", "Producto", "Cantidad actual", "Descripción", "Fecha", "Movimiento"), show="headings", height=19)
         self.treeviewMov.heading("Tipo", text="Tipo")
         self.treeviewMov.heading("Producto", text="Producto")
         self.treeviewMov.heading("Cantidad actual", text="Cantidad actual")
@@ -59,15 +59,13 @@ class VistaMenuMov:
         CustomHovertip(self.label_anadir, text="Añadir", hover_delay=50)#Asina lo que se quiera mostrar al pasar el cursor por encima del boton
         
          #Eliminar
-        self.imagen_eliminar = Image.open("view/images/eliminar-512px.png")
-        self.imagen_eliminar.thumbnail((30, 30))
-        self.imagen_eliminar = ImageTk.PhotoImage(self.imagen_eliminar)
-        # Crear el botón sin colocarlo directamente, para poder asignar el CustomHovertip
-        self.label_eliminar = ttk.Button(self.ventanaMenuMov, image=self.imagen_eliminar, command=self.abrir_vista_del)
-        self.label_eliminar.place(x=225, y=2)
+        # self.imagen_eliminar = Image.open("view/images/eliminar-512px.png")
+        # self.imagen_eliminar.thumbnail((30, 30))
+        # self.imagen_eliminar = ImageTk.PhotoImage(self.imagen_eliminar)
+        # self.label_eliminar = ttk.Button(self.ventanaMenuMov, image=self.imagen_eliminar, command=self.abrir_vista_del)
+        # self.label_eliminar.place(x=225, y=2)
         # Aplicar el CustomHovertip
-        CustomHovertip(self.label_eliminar, text="Eliminar", hover_delay=50)
-        
+        # CustomHovertip(self.label_eliminar, text="Eliminar", hover_delay=50)
 
         self.mostrar_datos_mov()
 
@@ -95,21 +93,18 @@ class VistaMenuMov:
         vista_principla.ventanaPrincipal.wait_window(vista_principla.ventanaPrincipal)
         
     def abrir_vista_del(self):
-        from view.vista_eliminar_mov import VistaEliminarMovimiento
+        # from view.vista_eliminar_mov import VistaEliminarMovimiento
 
-        # Liberar el evento de grab_set() en la ventana actual
-        self.ventanaMenuMov.grab_release()
+        # # Liberar el evento de grab_set() en la ventana actual
+        # self.ventanaMenuMov.grab_release()
 
-        # Crea un objeto de la clase `VistaEliminar`.
-        vista_del = VistaEliminarMovimiento(self, self.modelo_stock)
+        # # Crea un objeto de la clase `VistaEliminar`.
+        # vista_del = VistaEliminarMovimiento(self, self.modelo_stock)
         
-        # Muestra la ventana de `VistaEliminar`.
-        vista_del.ventanaDel.grab_set()
-        vista_del.ventanaDel.wait_window(vista_del.ventanaDel)
+        # # Muestra la ventana de `VistaEliminar`.
+        # vista_del.ventanaDel.grab_set()
+        # vista_del.ventanaDel.wait_window(vista_del.ventanaDel)
         
-        # Después de cerrar la ventana de eliminación, actualiza la vista principal
-        self.mostrar_datos_mov()
-
-
-                
-        
+        # # Después de cerrar la ventana de eliminación, actualiza la vista principal
+        # self.mostrar_datos_mov()
+        pass
