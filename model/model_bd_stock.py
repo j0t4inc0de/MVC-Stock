@@ -62,6 +62,7 @@ class ModeloStock:
         return precio[0] if precio is not None else None
 
     def verificar_credenciales(self, usuario, contraseña): # Query para verificar que los datos ingresados usuario/contraseña estan en la base de datos
+        usuario = usuario.strip()
         self.cursor.execute("SELECT * FROM usuarios WHERE usuario = ? AND contrasena = ?", (usuario, contraseña))
         resultado = self.cursor.fetchone()
         self.conn.commit()
