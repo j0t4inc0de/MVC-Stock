@@ -26,7 +26,6 @@ class VistaPrincipal:
         self.ventanaPrincipal.geometry("1100x430")
         self.ventanaPrincipal.resizable(width=False, height=False)
         self.modelo_stock = modelo_stock
-    
 
         # Treeview es la tabla donde pondremos los datos de la bd
         self.treeview = ttk.Treeview(self.ventanaPrincipal, columns=("Producto", "Precio", "Cantidad", "Estado", "Categoría"), show="headings", height=16)
@@ -115,6 +114,7 @@ class VistaPrincipal:
     def mostrar_datos(self):
         # Obtiene los datos de la base de datos.
         datos = self.modelo_stock.obtener_datos()
+
         # Elimina todos los elementos de la tabla.
         for item in self.treeview.get_children():
             self.treeview.delete(item)
@@ -216,6 +216,8 @@ class VistaPrincipal:
             self.treeview.delete(item)
         for dato in datos:
             self.treeview.insert("", "end", values=dato)
+            self.entry_buscar.delete(0, "end")
+            self.entry_buscar.insert(0, 'Buscador')
     
     def Excel_Datos(self):
         # Obtiene todos los datos del modelo de stock utilizando el método `obtener_datos()`.

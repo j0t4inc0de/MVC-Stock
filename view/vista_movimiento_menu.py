@@ -27,7 +27,7 @@ class VistaMenuMov:
         self.ventanaMenuMov.resizable(width=False, height=False)
         self.modelo_stock = modelo_stock
 
-        self.treeviewMov = ttk.Treeview(self.ventanaMenuMov, columns=("Tipo", "Producto", "Cantidad actual", "Descripción", "Fecha", "Movimiento"), show="headings", height=19)
+        self.treeviewMov = ttk.Treeview(self.ventanaMenuMov, columns=("Tipo", "Producto", "Cantidad actual", "Descripción", "Fecha", "Movimiento"), show="headings", height=20)
         self.treeviewMov.heading("Tipo", text="Tipo")
         self.treeviewMov.heading("Producto", text="Producto")
         self.treeviewMov.heading("Cantidad actual", text="Cantidad actual")
