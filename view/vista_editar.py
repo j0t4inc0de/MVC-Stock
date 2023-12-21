@@ -87,4 +87,4 @@ class VistaEditar:
         self.modelo_stock.edit_producto(existencia_id, nueva_cantidad, nuevo_precio, nuevo_estado,nueva_categoria,)
         self.vista_principal.mostrar_datos()
        
-        self.ventanaED.destroy()
+        mb.showinfo("Listo", "Producto editado.")

@@ -54,31 +54,38 @@ class  VistaProducto:
         self.category_combobox['values'] = categories # Le pone la lista de categorias
 
     def add_product(self): #  se encarga de agregar un nuevo producto al modelo
+        # Obtener valores de los campos
         selected_state_name = self.state_combobox.get()
-        state_id = self.get_state_id(selected_state_name) #  Utiliza el nombre del estado para obtener el ID usa la funcion de abajo 'def get_state_id'
-
         selected_category_name = self.category_combobox.get()
-        category_id = self.get_category_id(selected_category_name) #  Utiliza el nombre de la categoria para obtener el ID usa la funcion de abajo 'def get_category_id'
-
         product_name = self.entry_nombre_producto.get().lower()
-        product_price = float(self.entry_precio_producto.get())
+        product_price_str = self.entry_precio_producto.get()
+        product_cantidad_str = self.entry_cantidad_producto.get()
 
-        product_cantidad = self.entry_cantidad_producto.get()
-        product_cantidad = int(self.entry_cantidad_producto.get())
+        # Verificar campos vacíos
+        if not (selected_state_name and selected_category_name and product_name and product_price_str and product_cantidad_str):
+            mb.showwarning("Campos Vacíos", "Por favor, completa todos los campos.")
+            return
 
-        self.modelo_stock.add_producto(product_name, state_id, product_price, product_cantidad, category_id) # Utiliza la funcion del modelo para insertar los datos obtenidos en las anteriores lineas
+        # Convertir a tipos necesarios
+        state_id = self.get_state_id(selected_state_name)
+        category_id = self.get_category_id(selected_category_name)
+        product_price = float(product_price_str)
+        product_cantidad = int(product_cantidad_str)
 
-        # Estas lineas limpian los campos
+        # Agregar el producto al modelo
+        self.modelo_stock.add_producto(product_name, state_id, product_price, product_cantidad, category_id)
+
+        # Limpiar campos
         self.entry_nombre_producto.delete(0, tk.END)
         self.entry_precio_producto.delete(0, tk.END)
         self.entry_cantidad_producto.delete(0, tk.END)
         self.state_combobox.set("")
         self.category_combobox.set("")
-        
-        
-        self.vista_principal.mostrar_datos() #  Actualiza la tabla de productos
-        
-        #Rodrigo Cristobal: Se crea el mensaje al agregar un producto.
+
+        # Actualizar la tabla de productos
+        self.vista_principal.mostrar_datos()
+
+        # Mostrar mensaje de éxito
         mb.showinfo("Listo", "Producto agregado.")
         
         self.ventanaProducto.destroy() #  Cierra la ventana de agregar producto

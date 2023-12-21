@@ -71,34 +71,44 @@ class VistaMovimiento:
             print("ID de existencia no válido")
 
     def add_movimiento(self):
+        # Obtener valores de los campos
         selected_tipo_movimiento = self.tipo_movimiento_combobox.get()
-        tipo_movimiento_id = self.get_tipo_movimiento_id(selected_tipo_movimiento)
-
         selected_existencia = self.existencia_combobox.get()
-        existencia_id = self.get_existencia_id(selected_existencia)
-
         descripcion_movimiento = self.entry_descripcion_movimiento.get()
         fecha_movimiento = self.entry_fecha_movimiento.get()
-        cantidad_movimientos = int(self.entry_cantidad_movimientos.get())
+        cantidad_movimientos_str = self.entry_cantidad_movimientos.get()
 
-        # Si el tipo de movimiento es "entrada", sumamos
+        # Verificar campos vacíos
+        if not (selected_tipo_movimiento and selected_existencia and descripcion_movimiento and fecha_movimiento and cantidad_movimientos_str):
+            mb.showwarning("Campos Vacíos", "Por favor, completa todos los campos.")
+            return
+
+        # Convertir a tipos necesarios
+        tipo_movimiento_id = self.get_tipo_movimiento_id(selected_tipo_movimiento)
+        existencia_id = self.get_existencia_id(selected_existencia)
+        cantidad_movimientos = int(cantidad_movimientos_str)
+
+        # Realizar la operación según el tipo de movimiento
         if selected_tipo_movimiento == "entrada":
             self.modelo_stock.add_movimiento(tipo_movimiento_id, existencia_id, descripcion_movimiento, fecha_movimiento, cantidad_movimientos)
-
-        # Si el tipo de movimiento es "salida", restamos
         else:
             self.modelo_stock.add_movimiento(tipo_movimiento_id, existencia_id, descripcion_movimiento, fecha_movimiento, -cantidad_movimientos)
 
+        # Limpiar campos
         self.tipo_movimiento_combobox.set("")
         self.existencia_combobox.set("")
-        self.entry_cantidad_existencia.delete(0, tk.END)
+        self.entry_cantidad_movimientos.delete(0, tk.END)
         self.entry_descripcion_movimiento.delete(0, tk.END)
         self.entry_fecha_movimiento.delete(0, tk.END)
-        self.entry_cantidad_movimientos.delete(0, tk.END)
 
-        self.ventanaMovimiento.destroy()
+        # Cerrar ventana si es necesario
+        if self.ventanaMovimiento:
+            self.ventanaMovimiento.destroy()
+
+        # Actualizar la visualización de movimientos
         self.ventana_principal.mostrar_datos_mov()
-        #Rodrigo Cristobal: Se crea el mensaje al agregar un movimiento.
+
+        # Mostrar mensaje de éxito
         mb.showinfo("Listo", "Movimiento agregado.")
 
     def get_tipo_movimiento_id(self, tipo_movimiento_name):
